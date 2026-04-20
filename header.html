@@ -1,0 +1,288 @@
+<style>
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.72);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .header-container {
+    width: min(calc(100% - 40px), 1320px);
+    margin: 0 auto;
+  }
+
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 110px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .brand-badge {
+    width: 280px;
+    height: 88px;
+    border-radius: 0;
+    background: url('./로고.png') left center/contain no-repeat;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    color: #334155;
+    font-size: 0.96rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav a:hover {
+    color: #1d4ed8;
+  }
+
+  .nav-item {
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: -12px;
+    flex-shrink: 0;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.14);
+    backdrop-filter: blur(10px);
+    display: grid;
+    gap: 4px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 30;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #334155;
+    font-size: 0.9rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(37, 99, 235, 0.08);
+  }
+
+  .nav-item:hover .dropdown-menu,
+  .nav-item:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: 0;
+    padding-left: 18px;
+    flex-shrink: 0;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    height: 56px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background: #0b1736;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+
+  .nav-cta:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+  }
+
+  .nav-cta.quote-btn {
+    min-width: 168px;
+    height: 60px;
+    padding: 0 30px;
+    background: linear-gradient(135deg, #ff7a18 0%, #ff4d4f 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 18px 38px rgba(255, 102, 51, 0.28);
+    font-size: 1.02rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    position: relative;
+    left: -8px;
+  }
+
+  .nav-cta.quote-btn:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 22px 42px rgba(255, 102, 51, 0.34);
+  }
+
+  @media (max-width: 1180px) {
+    .nav {
+      gap: 14px;
+      font-size: 0.9rem;
+    }
+
+    .nav-cta {
+      min-width: 116px;
+      height: 50px;
+      padding: 0 20px;
+    }
+
+    .nav-cta.quote-btn {
+      min-width: 148px;
+      height: 54px;
+      padding: 0 24px;
+      left: -4px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .topbar-inner {
+      min-height: 72px;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .brand-badge {
+      width: 220px;
+      height: 64px;
+    }
+  }
+</style>
+
+<header class="topbar">
+  <div class="header-container topbar-inner">
+    <a href="./main.html#home" class="brand">
+      <div class="brand-badge"></div>
+    </a>
+
+    <nav class="nav">
+      <div class="nav-item">
+        <a href="./main.html#about" class="nav-link">회사소개</a>
+        <div class="dropdown-menu">
+          <a href="./main.html#about">실로암펜션 소개</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#about" class="nav-link">실로암스토리</a>
+        <div class="dropdown-menu">
+          <a href="./main.html#about">펜션 내부 외부 구조</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#rooms" class="nav-link">객실</a>
+        <div class="dropdown-menu">
+          <a href="./main.html#rooms">본관</a>
+          <a href="./main.html#facilities">별관</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#facilities" class="nav-link">부대시설</a>
+        <div class="dropdown-menu">
+          <a href="./main.html#facilities">족구장</a>
+          <a href="./풋살장.html">풋살장</a>
+          <a href="./main.html#contact">탁구장</a>
+          <a href="./당구장.html">당구장</a>
+          <a href="./수영장.html">수영장</a>
+          <a href="./main.html#contact">세미나실</a>
+          <a href="./main.html#contact">불멍</a>
+          <a href="./main.html#contact">공용화장실/샤워장</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#about" class="nav-link">패키지</a>
+        <div class="dropdown-menu">
+          <a href="./main.html#about">워크샵</a>
+          <a href="./main.html#about">교회</a>
+          <a href="./main.html#about">MT</a>
+          <a href="./main.html#about">레포츠패키지</a>
+          <a href="./main.html#about">식사패키지</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#about" class="nav-link">식사</a>
+        <div class="dropdown-menu">
+          <a href="./한식당.html">한식당</a>
+          <a href="./main.html#about">숯불세트</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./main.html#about" class="nav-link">마트·카페</a>
+        <div class="dropdown-menu">
+          <a href="./마트.html">마트</a>
+          <a href="./main.html#about">카페인중독</a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="./이용안내.html" class="nav-link">이용안내</a>
+        <div class="dropdown-menu">
+          <a href="./이용안내.html">환불 규정</a>
+          <a href="./main.html#reviews">시설 이용안내</a>
+          <a href="./main.html#home">픽업</a>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://siloam4u.letsnowgo.com/v2/reservation" class="nav-cta">예약 하기</a>
+        <a href="./main.html#contact" class="nav-cta quote-btn">견적 받기</a>
+      </div>
+    </nav>
+  </div>
+</header>

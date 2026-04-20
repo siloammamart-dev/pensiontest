@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실로암 한식당</title>
+  <style>
+    :root {
+      --bg: #f7f3eb;
+      --surface: #fffdf8;
+      --surface-2: #f1eadc;
+      --text: #1f1a17;
+      --muted: #6f655d;
+      --line: rgba(31, 26, 23, 0.08);
+      --accent: #8f5f31;
+      --accent-dark: #214c36;
+      --shadow: 0 14px 40px rgba(22, 20, 18, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1240px;
+      --header-height: 88px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(143,95,49,0.06), transparent 28%),
+        linear-gradient(180deg, #fbf8f2 0%, #f6f1e8 100%);
+      line-height: 1.6;
+    }
+
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    #site-header {
+      position: relative;
+      z-index: 50;
+    }
+
+    main {
+      display: block;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(33, 76, 54, 0.08);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .title {
+      margin: 14px 0 10px;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .desc,
+    .section-desc {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 720px;
+    }
+
+    .hero {
+      padding: 28px 0 52px;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: calc(78vh - 20px);
+      border-radius: 34px;
+      overflow: hidden;
+      background: #163526;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.02);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(16, 20, 18, 0.7) 0%, rgba(16, 20, 18, 0.38) 42%, rgba(16, 20, 18, 0.18) 100%),
+        linear-gradient(180deg, rgba(16, 20, 18, 0.2) 0%, rgba(16, 20, 18, 0.45) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      min-height: calc(78vh - 20px);
+      display: flex;
+      align-items: end;
+      padding: 48px;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+      color: white;
+    }
+
+    .hero-copy .eyebrow {
+      background: rgba(255,255,255,0.12);
+      color: #fff4de;
+    }
+
+    .hero-copy h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      font-size: clamp(16px, 2vw, 20px);
+      color: rgba(255,255,255,0.86);
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #fff3dd;
+      color: #2f241d;
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .intro-card,
+    .info-card,
+    .menu-card,
+    .feature-card,
+    .gallery-card,
+    .cta-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card {
+      border-radius: var(--radius-xl);
+      padding: 34px;
+    }
+
+    .intro-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .point {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--surface-2);
+      border: 1px solid rgba(31,26,23,0.05);
+    }
+
+    .point strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .point span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .info-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      min-height: 100%;
+    }
+
+    .info-card img {
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+    }
+
+    .info-badge {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      right: 22px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .info-badge strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .info-badge span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .brand-signboard-section {
+      padding: 12px 0 24px;
+    }
+
+    .brand-signboard {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(33, 76, 54, 0.98) 0%, rgba(24, 53, 38, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 48px rgba(22, 20, 18, 0.14);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .brand-signboard::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 28%),
+        linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .brand-signboard__copy {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+
+    .brand-signboard__copy .eyebrow {
+      background: rgba(255,255,255,0.12);
+      color: #fff3dd;
+    }
+
+    .brand-signboard__copy h2 {
+      margin: 16px 0 12px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-signboard__copy p {
+      margin: 0;
+      color: rgba(255,255,255,0.8);
+      font-size: 17px;
+      max-width: 520px;
+    }
+
+    .brand-signboard__image {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .brand-signboard__frame {
+      width: min(100%, 215px);
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    .brand-signboard__frame img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .menu-card {
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-thumb {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #eae4db;
+    }
+
+    .menu-thumb img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+
+    .menu-card:hover .menu-thumb img {
+      transform: scale(1.05);
+    }
+
+    .menu-body {
+      padding: 20px 20px 22px;
+    }
+
+    .menu-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      background: #f6efe3;
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .menu-body h3 {
+      margin: 14px 0 8px;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    .menu-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .feature-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .feature-card {
+      border-radius: var(--radius-xl);
+      padding: 34px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .feature-item {
+      padding: 18px 18px 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: #fcf8f1;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .feature-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-image {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-card {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-card img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .cta-card {
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      min-height: 430px;
+    }
+
+    .cta-card > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(17,22,20,0.82) 0%, rgba(17,22,20,0.46) 45%, rgba(17,22,20,0.18) 100%);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      padding: 48px;
+      max-width: 620px;
+    }
+
+    .cta-content h2 {
+      margin: 16px 0 14px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-content p {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 18px;
+    }
+
+    .cta-note {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .cta-note span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 28px 0 60px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(31,26,23,0.08);
+      padding-top: 22px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1100px) {
+      .brand-signboard {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-signboard__copy p {
+        max-width: 100%;
+      }
+
+      .menu-grid,
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .intro-grid,
+      .feature-wrap { grid-template-columns: 1fr; }
+      .info-card img,
+      .feature-image img { min-height: 360px; }
+    }
+
+    @media (max-width: 900px) {
+      .page-opening__scene {
+        width: min(72vw, 430px);
+      }
+
+      .page-opening.is-open .page-opening__cover {
+        transform: rotateY(-118deg);
+      }
+    }
+
+      .page-opening__cover,
+      .page-opening__cover-front,
+      .page-opening__cover-back {
+        border-radius: 22px;
+      }
+
+      .page-opening.is-open .page-opening__cover {
+        transform: rotateY(-98deg);
+      }
+
+
+    @media (max-width: 760px) {
+      .brand-signboard {
+        padding: 24px;
+        border-radius: 24px;
+      }
+
+      .brand-signboard__frame {
+        padding: 12px;
+        border-radius: 18px;
+      }
+
+      .hero {
+        padding: 16px 0 28px;
+      }
+
+      .hero-card,
+      .hero-content {
+        min-height: 78svh;
+      }
+
+      .hero-content,
+      .cta-content,
+      .feature-card,
+      .intro-card {
+        padding: 26px;
+      }
+
+      .intro-points,
+      .menu-grid,
+      .gallery-grid { grid-template-columns: 1fr; }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-head {
+        display: block;
+        margin-bottom: 22px;
+      }
+
+      .menu-body h3 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-media">
+            <img src="/한식당/식사.jpg" alt="실로암 한식당 식사 사진" />
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="hero-copy">
+              <span class="eyebrow">SILOAM HANSIKDANG</span>
+              <h1>단체 식사도<br />정갈하고 든든하게</h1>
+              <p>
+                실로암 한식당은 한 끼 식사부터 모임 식사, 단체 상차림까지 편안하게 즐길 수 있는 공간입니다.
+                깔끔한 플레이팅과 푸짐한 구성으로 식사의 만족도를 높였습니다.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#menu">대표 메뉴 보기</a>
+                <a class="btn btn-secondary" href="#contact">예약 안내</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container intro-grid">
+        <div class="intro-card">
+          <span class="eyebrow">한식당 소개</span>
+          <h2 class="title">깔끔한 상차림과 다양한 메뉴를 한 페이지 안에</h2>
+          <p class="desc">
+            첫 화면에는 식사 사진을 크게 배치해 분위기를 전달하고, 그 아래에는 메뉴판처럼 대표 메뉴를 정리하는 구성이 가장 잘 어울립니다.
+            방문자가 들어오자마자 식당의 느낌을 보고, 바로 어떤 메뉴가 있는지 확인할 수 있어 훨씬 직관적입니다.
+          </p>
+          <div class="intro-points">
+            <div class="point">
+              <strong>첫 화면 집중</strong>
+              <span>식사 사진을 크게 보여 줘서 한식당 분위기를 바로 전달합니다.</span>
+            </div>
+            <div class="point">
+              <strong>메뉴판형 구성</strong>
+              <span>대표 메뉴를 카드 형태로 나눠 한눈에 보기 쉽게 정리합니다.</span>
+            </div>
+            <div class="point">
+              <strong>단체 예약 유도</strong>
+              <span>식사 세트와 바베큐 구성을 따로 강조해 예약 문의로 연결합니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <img src="/한식당/식사셋팅.jpg" alt="실로암 한식당 식사 세팅" />
+          <div class="info-badge">
+            <strong>추천 페이지 구조</strong>
+            <span>Hero → 대표 메뉴 → 식사 세트 → 바베큐/패키지 → 갤러리 → 예약 안내</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="brand-signboard-section">
+      <div class="container">
+        <div class="brand-signboard">
+          <div class="brand-signboard__copy">
+            <span class="eyebrow">SILOAM HANSIKDANG</span>
+            <h2>실로암 한식당의 분위기를<br />간판처럼 한 번 더 보여줍니다</h2>
+            <p>
+              메뉴로 들어가기 전에 브랜드 이미지를 한 번 더 보여 주는 구간입니다.
+              페이지 중간에 간판처럼 배치하면 한식당의 인상이 더 또렷해지고, 메뉴판으로 넘어가는 흐름도 자연스러워집니다.
+            </p>
+          </div>
+          <div class="brand-signboard__image">
+            <div class="brand-signboard__frame">
+              <img src="/한식당/실로암 한식당 배너.png" alt="실로암 한식당 배너" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">SIGNATURE MENU</span>
+            <h2 class="title">대표 메뉴</h2>
+          </div>
+          <p class="section-desc">
+            음식 사진이 모두 깔끔하게 상단에서 내려다보는 구도라 메뉴판 느낌으로 정리하기 좋습니다.
+            실제 운영 메뉴에 맞춰 설명과 가격만 추가하면 바로 사용할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/양념게장.jpg" alt="양념게장" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">BEST MENU</span>
+              <h3>양념게장</h3>
+              <p>매콤달콤한 양념과 고소한 참깨가 어우러진 밥도둑 메뉴입니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/코다리.jpg" alt="코다리" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">HOT PLATE</span>
+              <h3>코다리구이</h3>
+              <p>푸짐한 반찬과 함께 즐기는 메인 메뉴로 단체 식사에도 잘 어울립니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/골뱅이소면.jpg" alt="골뱅이소면" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">FRESH & SPICY</span>
+              <h3>골뱅이소면</h3>
+              <p>새콤매콤한 양념과 소면 조합으로 가볍게 즐기기 좋은 인기 메뉴입니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/낚지볶음.jpg" alt="낙지볶음" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">SPICY FAVORITE</span>
+              <h3>낙지볶음</h3>
+              <p>감칠맛 나는 매콤함과 아삭한 채소가 어우러지는 든든한 한 접시입니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/부대찌개.png" alt="부대찌개" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">GROUP MENU</span>
+              <h3>부대찌개</h3>
+              <p>푸짐한 재료와 얼큰한 국물로 여럿이 함께 즐기기 좋은 대표 메뉴입니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/닭볶음탕.jpg" alt="닭볶음탕" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">SHARING MENU</span>
+              <h3>닭볶음탕</h3>
+              <p>진한 국물과 부드러운 닭고기가 어우러진 인기 메뉴로 단체 상차림에 잘 맞습니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/모둠전.jpg" alt="모둠전" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">SIDE MENU</span>
+              <h3>모둠전</h3>
+              <p>바삭한 전을 다양하게 담아내 모임이나 술상 메뉴로도 활용하기 좋습니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/부침개.jpg" alt="부침개" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">CRISPY MENU</span>
+              <h3>부침개</h3>
+              <p>노릇하게 부쳐낸 전 스타일 메뉴로 부담 없이 곁들이기 좋습니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/비빔밥.jpg" alt="비빔밥" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">KOREAN CLASSIC</span>
+              <h3>비빔밥</h3>
+              <p>정갈한 나물 구성과 고추장 소스로 누구나 편하게 즐길 수 있는 기본 메뉴입니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      
+    </section>
+
+    
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">KID MENU</span>
+            <h2 class="title">어린이 메뉴</h2>
+          </div>
+        
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/돈까스.jpg" alt="돈까스" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">BEST MENU</span>
+              <h3>돈까스</h3>
+              <p>새콤달콤한 소스와 바삭한 돈까스 어린이들이 좋아하는 메뉴입니다.</p>
+            </div>
+          </article>
+
+      </section>
+
+
+    <section class="section" id="set">
+      <div class="container feature-wrap">
+        <div class="feature-card">
+          <span class="eyebrow">MEAL SET</span>
+          <h2 class="title">식사 세트와 상차림을 따로 강조</h2>
+          <p class="desc">
+            단품 메뉴와 별도로 식사 세트 구성을 보여 주면 단체 고객이 선택하기 훨씬 쉬워집니다.
+            특히 펜션 손님은 어떤 상차림이 가능한지를 먼저 궁금해하기 때문에 별도 섹션이 효과적입니다.
+          </p>
+          <div class="feature-list">
+            <div class="feature-item">
+              <strong>기본 식사 세팅</strong>
+              <span>정갈하게 준비된 상차림 이미지를 활용해 단체 식사 분위기를 전달합니다.</span>
+            </div>
+            <div class="feature-item">
+              <strong>식사 + 반찬 구성</strong>
+              <span>메인 메뉴와 함께 나오는 상차림 느낌을 보여 주면 예약 전 신뢰감이 높아집니다.</span>
+            </div>
+            <div class="feature-item">
+              <strong>간편 식사 옵션</strong>
+              <span>비빔밥처럼 편하게 제공 가능한 메뉴도 함께 보여 주면 선택 폭이 넓어집니다.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-image">
+          <img src="/한식당/식사셋팅.jpg" alt="식사 세트" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bbq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">BBQ & PACKAGE</span>
+            <h2 class="title">바베큐와 패키지 메뉴</h2>
+          </div>
+          <p class="section-desc">
+            한식당 페이지 안에 바베큐 구성까지 함께 넣어 두면 실로암펜션의 장점을 더 넓게 보여 줄 수 있습니다.
+            식당만 소개하는 페이지가 아니라 식사 전체 서비스처럼 보이게 됩니다.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/바베큐1.png" alt="바베큐 한상" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">OUTDOOR DINING</span>
+              <h3>바베큐 한상</h3>
+              <p>고기, 채소, 찌개까지 함께 구성된 푸짐한 바베큐 상차림입니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/식사셋팅.jpg" alt="세팅된 식사 테이블" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">GROUP TABLE</span>
+              <h3>단체 식사 테이블</h3>
+              <p>여럿이 둘러앉아 즐기는 실로암만의 단체 식사 분위기를 강조할 수 있습니다.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-thumb"><img src="/한식당/식사.jpg" alt="식사 패키지 이미지" /></div>
+            <div class="menu-body">
+              <span class="menu-meta">PACKAGE IDEA</span>
+              <h3>식사 패키지 구성</h3>
+              <p>숙박과 함께 즐기는 식사 패키지나 단체 예약용 구성으로 자연스럽게 연결할 수 있습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">FOOD GALLERY</span>
+            <h2 class="title">추가 갤러리</h2>
+          </div>
+          <p class="section-desc">
+            카드형 메뉴 아래에 갤러리를 추가하면 페이지가 더 풍성해지고, 실제 방문 전 기대감도 높일 수 있습니다.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-card"><img src="/한식당/양념게장.jpg" alt="양념게장 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/코다리.jpg" alt="코다리 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/골뱅이소면.jpg" alt="골뱅이소면 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/비빔밥.jpg" alt="비빔밥 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/부침개.jpg" alt="부침개 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/모둠전.jpg" alt="모둠전 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/부대찌게.jpg" alt="부대찌개 갤러리" /></div>
+          <div class="gallery-card"><img src="/한식당/닭볶음탕.jpg" alt="닭볶음탕 갤러리" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta-card">
+          <img src="/한식당/식사.jpg" alt="실로암 한식당 예약 안내 배경" />
+          <div class="cta-overlay"></div>
+          <div class="cta-content">
+            <span class="eyebrow">RESERVATION GUIDE</span>
+            <h2>단체 식사와 상차림은<br />미리 문의해 주세요</h2>
+            <p>
+              메뉴 구성, 인원, 식사 시간에 따라 맞춤형으로 준비할 수 있도록 예약 문의 영역을 배치했습니다.
+              여기에 실제 전화번호나 카카오톡 링크만 연결하면 바로 사용할 수 있습니다.
+            </p>
+            <div class="cta-note">
+              <span>단체 식사 예약 가능</span>
+              <span>상차림 문의 가능</span>
+              <span>숙박 연계 식사 가능</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="tel:010-0000-0000">전화 문의</a>
+              <a class="btn btn-secondary" href="#top">맨 위로</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© SILOAM HANSIKDANG</span>
+      <span>메뉴명, 가격, 예약 연락처만 실제 운영 정보로 바꾸면 바로 적용 가능합니다.</span>
+    </div>
+  </footer>
+
+  <script src="/header-loader.js"></script>
+</body>
+</html>

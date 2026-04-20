@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실로암펜션 | 가평 단체 연수원형 펜션</title>
+    <meta
+      name="description"
+      content="숙박, 세미나, 식사, 레포츠를 한 번에. 가평 단체 연수원형 펜션 실로암펜션 홈페이지 시안입니다."
+    />
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --surface: rgba(255, 255, 255, 0.82);
+        --surface-strong: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --line: rgba(15, 23, 42, 0.08);
+        --primary: #1d4ed8;
+        --primary-soft: rgba(29, 78, 216, 0.1);
+        --accent: #0f766e;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --max: 1280px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 30%),
+          radial-gradient(circle at top right, rgba(15, 118, 110, 0.08), transparent 28%),
+          linear-gradient(180deg, #f8fbff 0%, #f4f6fb 45%, #eef2f8 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(calc(100% - 40px), var(--max));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.72);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+      }
+
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 124px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0;
+      }
+
+      .brand-badge {
+        width: 400px;
+        height: 112px;
+        border-radius: 0;
+        background: url("./로고.png") left center/contain no-repeat;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        color: #334155;
+        font-size: 0.96rem;
+      }
+
+      .nav a:hover {
+        color: var(--primary);
+      }
+
+      .nav-item {
+        position: relative;
+        padding-bottom: 12px;
+        margin-bottom: -12px;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 220px;
+        padding: 10px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 14px 35px rgba(15, 23, 42, 0.14);
+        backdrop-filter: blur(10px);
+        display: grid;
+        gap: 4px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        z-index: 30;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: #334155;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu a:hover {
+        background: rgba(37, 99, 235, 0.08);
+      }
+
+      .nav-item:hover .dropdown-menu,
+      .nav-item:focus-within .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 46px;
+        padding: 0 20px;
+        border-radius: 999px;
+        background: var(--text);
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      }
+
+      .consult-banner {
+        padding: 10px 0 0;
+      }
+
+      .consult-banner__inner {
+        display: grid;
+        grid-template-columns: 1.45fr 0.8fr;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 20px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: linear-gradient(135deg, #162033 0%, #22314d 100%);
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.1);
+      }
+
+      .consult-banner__left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 22px;
+        color: #f8f4ea;
+      }
+
+      .consult-banner__label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 34px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #f3e7d1;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+
+      .consult-banner__text {
+        font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+      }
+
+      .consult-banner__phone {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 22px;
+        background: linear-gradient(135deg, #b07a5f 0%, #9a674f 100%);
+        color: #fffaf4;
+        font-size: clamp(1.65rem, 2.5vw, 2.7rem);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .consult-banner__phone:hover {
+        filter: brightness(1.03);
+      }
+
+      .hero {
+        padding: 40px 0 32px;
+      }
+
+      .hero-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 40px;
+        min-height: 720px;
+        background: #0f172a;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-slides {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        animation: hero-autoplay 30s infinite;
+      }
+
+      .hero-slide:nth-child(1) {
+        background-image: url("./펜션/본관301리뉴얼1.png");
+        animation-delay: 0s;
+      }
+
+      .hero-slide:nth-child(2) {
+        background-image: url("./바베큐장/한식당 바베큐장.png");
+        animation-delay: 6s;
+      }
+
+      .hero-slide:nth-child(3) {
+        background-image: url("./부대시설/마트1.png");
+        animation-delay: 12s;
+      }
+
+      .hero-slide:nth-child(4) {
+        background-image: url("./수영장/수영장.png");
+        animation-delay: 18s;
+      }
+
+      .hero-slide:nth-child(5) {
+        background-image: url("./바베큐장/별관바베큐.png");
+        animation-delay: 24s;
+      }
+
+      @keyframes hero-autoplay {
+        0% { opacity: 0; }
+        5% { opacity: 1; }
+        20% { opacity: 1; }
+        25% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(135deg, rgba(2, 6, 23, 0.68), rgba(15, 23, 42, 0.5)),
+          radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.18), transparent 35%);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 72px;
+        display: grid;
+        grid-template-columns: 1.1fr 420px;
+        gap: 36px;
+        align-items: end;
+        min-height: 720px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 0.92rem;
+        backdrop-filter: blur(12px);
+      }
+
+      .hero h1 {
+        margin: 22px 0 18px;
+        font-size: clamp(3rem, 7vw, 5.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.06em;
+        color: white;
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      }
+
+      .hero p {
+        max-width: 720px;
+        margin: 0;
+        font-size: 1.08rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.82);
+        text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-width: 168px;
+        height: 56px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .btn-primary {
+        background: white;
+        color: var(--text);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-panel {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .stats-card {
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 30px;
+        padding: 26px;
+        backdrop-filter: blur(18px);
+        color: white;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .stat {
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+      }
+
+      .stat span {
+        color: rgba(255,255,255,0.82);
+        font-size: 0.92rem;
+      }
+
+      .floating-strip {
+        margin-top: -54px;
+        position: relative;
+        z-index: 4;
+      }
+
+      .strip-card {
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(255, 255, 255, 0.74);
+        backdrop-filter: blur(18px);
+        border-radius: 28px;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+        padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      .strip-item {
+        padding: 20px 22px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(15, 23, 42, 0.05);
+      }
+
+      .strip-item strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 8px;
+      }
+
+      .strip-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 0.93rem;
+      }
+
+      section {
+        padding: 110px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 34px;
+      }
+
+      .section-kicker {
+        display: inline-block;
+        margin-bottom: 16px;
+        color: var(--primary);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.05;
+        letter-spacing: -0.05em;
+      }
+
+      .section-desc {
+        max-width: 560px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .purpose-grid,
+      .room-grid,
+      .facility-grid,
+      .review-grid {
+        display: grid;
+        gap: 22px;
+      }
+
+      .purpose-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .purpose-card,
+      .room-card,
+      .facility-card,
+      .review-card,
+      .contact-card,
+      .gallery-main,
+      .gallery-side,
+      .about-panel {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(18px);
+        border-radius: 28px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+
+      .purpose-card {
+        padding: 26px;
+      }
+
+      .purpose-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+      }
+
+      .purpose-card h3,
+      .room-card h3,
+      .facility-card h3,
+      .review-card h3,
+      .contact-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.22rem;
+        letter-spacing: -0.03em;
+      }
+
+      .purpose-card p,
+      .room-card p,
+      .facility-card p,
+      .review-card p,
+      .contact-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+      }
+
+      .about > .about-panel:only-child {
+        grid-column: 1 / -1;
+      }
+
+      .about-panel {
+        padding: 34px;
+      }
+
+      .about-list {
+        display: grid;
+        gap: 16px;
+        margin-top: 26px;
+      }
+
+      .about-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 14px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .about-row strong {
+        font-size: 0.95rem;
+      }
+
+      .about-row span {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .gallery-stack {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .gallery-main,
+      .gallery-side {
+        overflow: hidden;
+        min-height: 520px;
+      }
+
+      .gallery-main img,
+      .gallery-side img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 18px;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+      }
+
+      .gallery-side > div {
+        overflow: hidden;
+        border-radius: 28px;
+        background: var(--surface);
+        border: 1px solid rgba(255,255,255,0.72);
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+
+      .room-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .room-card {
+        overflow: hidden;
+      }
+
+      .room-card img {
+        height: 240px;
+        object-fit: cover;
+      }
+
+      .room-body,
+      .facility-body,
+      .review-body {
+        padding: 24px;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        height: 34px;
+        padding: 0 14px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.05);
+        color: #334155;
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      .facility-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .facility-card {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        overflow: hidden;
+      }
+
+      .facility-card img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .facility-media {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .facility-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        animation: facility-autoplay 12s infinite;
+      }
+
+      .facility-slide:nth-child(1) { animation-delay: 0s; }
+      .facility-slide:nth-child(2) { animation-delay: 4s; }
+      .facility-slide:nth-child(3) { animation-delay: 8s; }
+
+      @keyframes facility-autoplay {
+        0% { opacity: 0; }
+        8% { opacity: 1; }
+        28% { opacity: 1; }
+        36% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      .cta-band {
+        padding: 36px;
+        border-radius: 34px;
+        background: linear-gradient(135deg, #0f172a, #1e293b 58%, #0f766e 140%);
+        color: white;
+        box-shadow: var(--shadow);
+        display: grid;
+        grid-template-columns: 1.2fr auto;
+        gap: 26px;
+        align-items: center;
+      }
+
+      .cta-band p {
+        margin: 14px 0 0;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.8;
+      }
+
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .cta-actions .btn-primary {
+        background: white;
+      }
+
+      .cta-actions .btn-secondary {
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+
+      .review-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .review-card {
+        padding: 6px;
+      }
+
+      .review-body {
+        padding-top: 28px;
+      }
+
+      .review-quote {
+        font-size: 1.08rem;
+        line-height: 1.8;
+        color: #1e293b;
+      }
+
+      .review-meta {
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .contact {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 24px;
+      }
+
+      .contact-card {
+        padding: 34px;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 16px;
+        margin-top: 26px;
+      }
+
+      .contact-item {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .contact-item strong {
+        font-size: 0.95rem;
+      }
+
+      .contact-item span,
+      .contact-item a {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .mini-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .mini-form .full {
+        grid-column: 1 / -1;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 18px;
+        padding: 16px 18px;
+        font: inherit;
+        color: var(--text);
+        outline: none;
+      }
+
+      textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        border: 0;
+        cursor: pointer;
+        background: var(--text);
+        color: white;
+        height: 56px;
+        border-radius: 18px;
+        font: inherit;
+        font-weight: 800;
+      }
+
+      footer {
+        padding: 36px 0 60px;
+        color: var(--muted);
+      }
+
+      .footer-box {
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        padding-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 1200px) {
+        .hero-content,
+        .about,
+        .contact,
+        .gallery-stack,
+        .cta-band {
+          grid-template-columns: 1fr;
+        }
+
+        .purpose-grid,
+        .room-grid,
+        .review-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .strip-card {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .consult-banner__inner {
+          grid-template-columns: 1fr;
+        }
+
+        .consult-banner__left {
+          justify-content: center;
+          flex-wrap: wrap;
+          text-align: center;
+        }
+
+        .consult-banner__text {
+          white-space: normal;
+        }
+
+        .hero-content,
+        .about,
+        .contact,
+        .gallery-stack,
+        .cta-band {
+          grid-template-columns: 1fr;
+        }
+
+        .purpose-grid,
+        .room-grid,
+        .review-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .strip-card {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 860px) {
+        .container {
+          width: min(calc(100% - 24px), var(--max));
+        }
+
+        .topbar-inner {
+          min-height: 72px;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .consult-banner {
+          padding-top: 8px;
+        }
+
+        .consult-banner__inner {
+          border-radius: 16px;
+        }
+
+        .consult-banner__left {
+          padding: 14px;
+          gap: 10px;
+        }
+
+        .consult-banner__label,
+        .consult-banner__text {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .consult-banner__phone {
+          font-size: 1.8rem;
+          padding: 16px 12px;
+        }
+
+        .hero {
+          padding-top: 20px;
+        }
+
+        .hero-card,
+        .hero-content {
+          min-height: auto;
+        }
+
+        .hero-content {
+          padding: 28px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .floating-strip {
+          margin-top: -26px;
+        }
+
+        .strip-card,
+        .purpose-grid,
+        .room-grid,
+        .facility-grid,
+        .review-grid,
+        .contact,
+        .about {
+          grid-template-columns: 1fr;
+        }
+
+        .facility-card {
+          grid-template-columns: 1fr;
+        }
+
+        .facility-card img {
+          height: 220px;
+        }
+
+        .facility-media {
+          height: 220px;
+        }
+
+        section {
+          padding: 78px 0;
+        }
+
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .gallery-main,
+        .gallery-side > div {
+          min-height: 240px;
+        }
+
+        .gallery-side {
+          grid-template-rows: none;
+        }
+
+        .mini-form {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <script src="./header-loader.js"></script>
+
+    <section class="consult-banner" aria-label="상담 안내 배너">
+      <div class="container">
+        <div class="consult-banner__inner">
+          <div class="consult-banner__left">
+            <span class="consult-banner__label">CONSULTING</span>
+            <span class="consult-banner__text"> MT, 워크샵, 수련회 상담문의 환영 · 항상 상담</span>
+          </div>
+          <a class="consult-banner__phone" href="tel:01083359152">010-8335-9152</a>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-card">
+            <div class="hero-slides" aria-hidden="true">
+              <span class="hero-slide"></span>
+              <span class="hero-slide"></span>
+              <span class="hero-slide"></span>
+              <span class="hero-slide"></span>
+              <span class="hero-slide"></span>
+            </div>
+            <div class="hero-content">
+              <div>
+                <span class="eyebrow">단체숙박 · 세미나 · 식사 · 레포츠</span>
+                <h1>
+                  넓고 깔끔한<br />
+                  가평 단체 펜션
+                </h1>
+                <p>
+                  대학생 MT, 교회 수련회, 회사 워크샵, 체육 단체 모임까지.
+                  숙박과 식사, 세미나 공간, 운동시설을 한 곳에서 편하게 이용할 수 있는
+                  실로암펜션의 모던 리뉴얼 시안입니다.
+                </p>
+                <div class="hero-actions">
+                  <a href="#contact" class="btn btn-primary">단체 예약 문의</a>
+                  <a href="#rooms" class="btn btn-secondary">객실 둘러보기</a>
+                </div>
+              </div>
+
+              <div class="hero-panel">
+                <div class="stats-card">
+                  <strong style="font-size: 1.15rem">한눈에 보는 실로암펜션</strong>
+                  <div class="stats-grid">
+                    <div class="stat">
+                      <strong>대형 수용</strong>
+                      <span>단체 전용 숙박 운영</span>
+                    </div>
+                    <div class="stat">
+                      <strong>부대시설</strong>
+                      <span>풋살 · 족구 · 노래방</span>
+                    </div>
+                    <div class="stat">
+                      <strong>식사 가능</strong>
+                      <span>조식 · 중식 · 석식 예약</span>
+                    </div>
+                    <div class="stat">
+                      <strong>문의 편의</strong>
+                      <span>실시간 예약 및 상담 연결</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container floating-strip">
+          <div class="strip-card">
+            <div class="strip-item">
+              <strong>대학생 MT</strong>
+              <p>여러 객실과 운동시설을 함께 이용하기 좋은 단체형 구성</p>
+            </div>
+            <div class="strip-item">
+              <strong>교회 수련회</strong>
+              <p>숙박과 식사, 세미나 공간을 한 번에 연결하기 쉬운 동선</p>
+            </div>
+            <div class="strip-item">
+              <strong>회사 워크샵</strong>
+              <p>강당·세미나실 중심의 단정한 행사 운영에 어울리는 공간</p>
+            </div>
+            <div class="strip-item">
+              <strong>체육 단체 모임</strong>
+              <p>풋살장과 야외 공간을 활용한 활동형 프로그램 운영 가능</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">About Siloam</span>
+              <h2 class="section-title">단체 고객에게 필요한 요소를<br />깔끔하게 모은 구성</h2>
+              <p class="section-desc">
+                복잡한 설명보다 예약 전에 궁금한 핵심 정보가 먼저 보이도록 정리했습니다.
+                실로암펜션의 강점은 예쁜 한 장보다 단체 이용에 편한 전체 구조입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="about">
+            <div class="about-panel">
+              <span class="section-kicker">Why Here</span>
+              <h3 style="margin: 0; font-size: 2rem; letter-spacing: -0.04em;">숙박 + 세미나 + 식사 + 레포츠</h3>
+              <p class="section-desc" style="max-width: none; margin-top: 18px;">
+                단체 예약에서 가장 중요한 것은 인원 수용, 이동 동선, 행사 운영 편의성입니다.
+                실로암펜션은 객실만 보여주는 방식보다 전체 운영이 편하다는 점을 전면에 보여주는 것이 더 잘 맞습니다.
+              </p>
+              <div class="about-list">
+                <div class="about-row">
+                  <strong>공간 구성</strong>
+                  <span>대형 단체 수용 중심 객실 구성과 넓은 야외 공간, 행사 진행이 쉬운 배치</span>
+                </div>
+                <div class="about-row">
+                  <strong>행사 운영</strong>
+                  <span>세미나실, 식당, 운동시설을 함께 연결해 하루 일정 운영이 편한 구조</span>
+                </div>
+                <div class="about-row">
+                  <strong>분위기</strong>
+                  <span>올드한 펜션 느낌보다 밝고 정돈된 리조트형 무드로 재해석한 홈페이지 스타일</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <span class="section-kicker">Siloam BBQ</span>
+          <h2 class="section-title">단체 고객에게 필요한 바베큐장<br />깔끔하게 모은 구성</h2>
+          <p class="section-desc">
+            복잡한 설명보다 예약 전에 궁금한 핵심 정보가 먼저 보이도록 정리했습니다.
+            실로암펜션의 강점은 예쁜 한 장보다 단체 이용에 편한 전체 구조입니다.
+          </p>
+          <div class="gallery-stack">
+            <div class="gallery-main">
+              <img src="./바베큐장/본관 바베큐장.png" alt="실로암펜션 메인 전경 시안" />
+            </div>
+            <div class="gallery-side">
+              <div>
+                <img src="./바베큐장/별관바베큐.png" alt="객실 분위기 시안" />
+              </div>
+              <div>
+                <img src="./바베큐장/한식당 바베큐장.png" alt="야외 공간 시안" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rooms">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Rooms</span>
+              <h2 class="section-title">단체 규모에 맞게 고르기 쉬운<br />객실 구성</h2>
+              <p class="section-desc">
+                객실 소개도 단순 나열보다 인원과 용도 중심으로 정리하는 것이 더 깔끔합니다.
+                아래 카드는 실제 객실명에 맞춰 쉽게 교체할 수 있도록 구성했습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="room-grid">
+            <article class="room-card">
+              <img src="./펜션/본관202.png" alt="대형 객실 시안" />
+              <div class="room-body">
+                <h3>본관 대형 객실</h3>
+                <p>대형 단체 수용에 맞춘 중심 객실. MT, 수련회, 워크샵 메인 객실로 활용하기 좋습니다.</p>
+                <div class="pill-row">
+                  <span class="pill">대형 인원 수용</span>
+                  <span class="pill">단체 행사 적합</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <img src="./펜션/본관301 리뉴얼.png" alt="중형 객실 시안" />
+              <div class="room-body">
+                <h3>중형 그룹 객실</h3>
+                <p>조별 이동이나 팀별 숙박 구성이 필요한 그룹 행사에 활용하기 좋은 객실 구성입니다.</p>
+                <div class="pill-row">
+                  <span class="pill">팀별 배정</span>
+                  <span class="pill">중형 그룹 추천</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <img src="./펜션/별관 2인방.png" alt="별관 객실 시안" />
+              <div class="room-body">
+                <h3>별관 객실</h3>
+                <p>소규모 그룹이나 운영 인원 분리 숙박이 필요한 경우 함께 구성하기 좋은 타입입니다.</p>
+                <div class="pill-row">
+                  <span class="pill">소규모 분리 숙박</span>
+                  <span class="pill">유연한 운영</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="facilities">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Facilities</span>
+              <h2 class="section-title">단체 고객 만족도를 높이는<br />핵심 부대시설</h2>
+              <p class="section-desc">
+                시설이 많아도 예전 방식처럼 전부 작게 보여주면 오히려 산만해 보입니다.
+                핵심 시설만 크게 보여주는 편이 더 세련되고 설득력 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="facility-grid">
+            <article class="facility-card">
+              <img src="./부대시설/풋살.jpg" alt="운동시설 시안" />
+              <div class="facility-body">
+                <h3>풋살장 · 족구장 · 야외 활동 공간</h3>
+                <p>활동형 단체에게 바로 어필되는 핵심 시설입니다. 메인 화면에서도 큰 사진 한 장으로 보여주는 구성이 좋습니다.</p>
+                <div class="pill-row">
+                  <span class="pill">체육 단체</span>
+                  <span class="pill">MT 인기 시설</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="facility-card">
+              <img src="./부대시설/세미나실.jpg" alt="세미나실 시안" />
+              <div class="facility-body">
+                <h3>강당 · 세미나실</h3>
+                <p>워크샵, 교회 프로그램, 오리엔테이션 등 실내 모임 운영에 필요한 공간을 함께 강조합니다.</p>
+                <div class="pill-row">
+                  <span class="pill">워크샵</span>
+                  <span class="pill">수련회</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="facility-card">
+              <img src="./한식당/식사.jpg" alt="식사 공간 시안" />
+              <div class="facility-body">
+                <h3>대형 식당 · 단체 식사</h3>
+                <p>조식, 중식, 석식 예약이 가능하다는 메시지는 단체 예약 문의 전환에 강하게 작용합니다.</p>
+                <div class="pill-row">
+                  <span class="pill">식사 예약 가능</span>
+                  <span class="pill">운영 편의성</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="facility-card">
+              <div class="facility-media">
+                <img class="facility-slide" src="./부대시설/노래방.jpg" alt="노래방 시안" />
+                <img class="facility-slide" src="./부대시설/노래방1.png" alt="식사 공간 시안" />
+                <img class="facility-slide" src="./부대시설/카페.jpg" alt="카페 시안" />
+              </div>
+              <div class="facility-body">
+                <h3>노래방 · 카페 · 편의 공간</h3>
+                <p>행사 후 자유 시간까지 한 장소에서 해결된다는 점을 정리해서 보여주면 사이트 완성도가 높아집니다.</p>
+                <div class="pill-row">
+                  <span class="pill">단체 만족도</span>
+                  <span class="pill">부가 체류 요소</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="cta-band">
+            <div>
+              <span class="section-kicker" style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">Reservation</span>
+              <h2 style="margin: 0; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.05em;">단체 예약은 빠르게,<br />문의는 더 간단하게</h2>
+              <p>
+                지금 홈페이지는 예쁘기보다 예약 동선이 분명해야 합니다. 실시간 예약과 전화 문의,
+                단체 문의 버튼을 메인부터 반복 배치하면 전환율이 좋아집니다.
+              </p>
+            </div>
+            <div class="cta-actions">
+              <a href="#contact" class="btn btn-primary">단체 문의하기</a>
+              <a href="#contact" class="btn btn-secondary">전화 상담 연결</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="section-kicker">Reviews</span>
+              <h2 class="section-title">실제 고객 후기는<br />짧고 믿음 있게</h2>
+              <p class="section-desc">
+                후기도 오래된 게시판 느낌보다 핵심 문장 중심으로 정리하면 사이트 전체가 훨씬 고급스럽게 보입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="review-grid">
+            <article class="review-card">
+              <div class="review-body">
+                <div class="review-quote">“학생들 단체로 이용했는데 공간이 넓고 시설 이동이 편해서 일정 진행이 수월했어요.”</div>
+                <div class="review-meta">대학생 MT 이용팀</div>
+              </div>
+            </article>
+            <article class="review-card">
+              <div class="review-body">
+                <div class="review-quote">“숙박, 식사, 세미나 공간이 한 번에 해결돼서 교회 수련회 장소로 만족도가 높았습니다.”</div>
+                <div class="review-meta">교회 수련회 단체</div>
+              </div>
+            </article>
+            <article class="review-card">
+              <div class="review-body">
+                <div class="review-quote">“운동시설과 야외 공간이 좋아서 체육 행사와 친목 프로그램을 함께 진행하기 좋았습니다.”</div>
+                <div class="review-meta">체육 단체 모임</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="contact">
+            <div class="contact-card">
+              <span class="section-kicker">Contact</span>
+              <h3 style="font-size: 2rem; margin-bottom: 16px; letter-spacing: -0.04em;">예약 전 궁금한 내용,<br />바로 문의하세요</h3>
+              <p>
+                실제 운영 정보에 맞게 전화번호, 주소, 예약 링크, 계좌안내, 버스 주차 안내 등을 연결하면 됩니다.
+              </p>
+
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>전화 문의</strong>
+                  <span>010-8335-9152</span>
+                </div>
+                <div class="contact-item">
+                  <strong>실시간 예약</strong>
+                  <a href="#">예약 페이지 연결</a>
+                </div>
+                <div class="contact-item">
+                  <strong>위치</strong>
+                  <span>경기도 가평군 대성리 인근 / 역 도보 약 15분</span>
+                </div>
+                <div class="contact-item">
+                  <strong>이용 안내</strong>
+                  <span>단체 숙박, 세미나, 식사, 운동시설 예약 문의 가능</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-card">
+              <span class="section-kicker">Quick Inquiry</span>
+              <h3 style="font-size: 1.5rem; margin-bottom: 8px; letter-spacing: -0.03em;">간단 문의 폼</h3>
+              <p>실제 운영 시에는 메일 발송 또는 폼 서비스와 연결하면 됩니다.</p>
+              <form class="mini-form" onsubmit="event.preventDefault(); alert('문의 전송 예시입니다. 실제 운영 시 폼 서비스와 연결해주세요.');">
+                <input type="text" placeholder="단체명 / 예약자명" />
+                <input type="text" placeholder="연락처" />
+                <select>
+                  <option>이용 목적 선택</option>
+                  <option>대학생 MT</option>
+                  <option>교회 수련회</option>
+                  <option>회사 워크샵</option>
+                  <option>체육 단체</option>
+                </select>
+                <input type="text" placeholder="희망 인원" />
+                <textarea class="full" placeholder="이용 희망 날짜, 숙박 여부, 식사 여부 등 문의 내용을 남겨주세요."></textarea>
+                <button class="submit-btn full" type="submit">문의 남기기</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-box">
+        <div>© 2026 실로암펜션. Modern homepage concept.</div>
+        <div>단체 펜션 · 워크샵 · 세미나 · 식사 · 레포츠</div>
+      </div>
+    </footer>
+  </body>
+</html>

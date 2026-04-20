@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실로암펜션 | 수영장</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      color: #1f2937;
+      background: #f6f8fb;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; height: auto; }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* header */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 78px;
+    }
+
+    .brand {
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #475569;
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .nav a {
+      position: relative;
+      padding: 8px 0;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: #0ea5e9;
+    }
+
+    .nav a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      background: #0ea5e9;
+      border-radius: 999px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 800;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn-outline {
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      background: #fff;
+    }
+
+    .nav-btn-outline:hover {
+      border-color: #94a3b8;
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
+    }
+
+    .nav-btn-primary:hover {
+      transform: translateY(-1px);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      border-radius: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+      width: 18px;
+      height: 2px;
+      background: #0f172a;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      padding: 0 16px 16px;
+      background: rgba(255,255,255,0.98);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 14px 6px;
+      font-weight: 700;
+      color: #334155;
+      border-top: 1px solid #eef2f7;
+    }
+
+    .mobile-nav a.active {
+      color: #0ea5e9;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(120deg, rgba(5, 23, 45, 0.65), rgba(5, 23, 45, 0.2)),
+        url('./수영장/수영장.png') center/cover no-repeat;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(246,248,251,1) 0%, rgba(246,248,251,0) 18%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      padding: 110px 0 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+
+    .hero p {
+      margin: 20px 0 0;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: rgba(255,255,255,0.92);
+      max-width: 620px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .hero-cards {
+      position: relative;
+      z-index: 2;
+      margin-top: -56px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .glass-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .glass-card span {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.1;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 520px;
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    .feature-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .feature-image,
+    .feature-copy,
+    .gallery-card,
+    .info-card,
+    .cta-box {
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .feature-image img {
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+    }
+
+    .feature-copy {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .feature-copy .mini {
+      color: #0ea5e9;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .feature-copy h3 {
+      margin: 0 0 14px;
+      font-size: 2rem;
+      line-height: 1.15;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+    }
+
+    .feature-copy p {
+      margin: 0;
+      color: #5b6472;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .bullet-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e5edf5;
+    }
+
+    .bullet-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      margin-top: 8px;
+      background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+      flex: 0 0 auto;
+    }
+
+    .bullet-item strong {
+      display: block;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-card {
+      position: relative;
+    }
+
+    .gallery-card img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-card.large { grid-column: span 7; min-height: 520px; }
+    .gallery-card.tall { grid-column: span 5; min-height: 520px; }
+    .gallery-card.wide { grid-column: span 6; min-height: 340px; }
+
+    .gallery-overlay {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(15,23,42,0.08), rgba(15,23,42,0.72));
+    }
+
+    .gallery-overlay strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 28px;
+    }
+
+    .info-card .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+      color: #0f172a;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      padding-top: 0;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+      background:
+        linear-gradient(135deg, rgba(2,132,199,0.94), rgba(37,99,235,0.95)),
+        url('./수영장/수영장 쉼터.png') center/cover no-repeat;
+      color: #fff;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 18, 38, 0.28);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cta-content h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-content p {
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .footer {
+      padding: 34px 0 50px;
+      color: #64748b;
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .feature-layout,
+      .cta-content,
+      .section-head {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .gallery-card.large,
+      .gallery-card.tall,
+      .gallery-card.wide {
+        grid-column: span 12;
+      }
+
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .nav,
+      .nav-actions {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .mobile-nav.open {
+        display: block;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .card-grid { grid-template-columns: 1fr; }
+      .feature-layout { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      section { padding: 72px 0; }
+      .hero { min-height: 78vh; }
+      .feature-copy, .info-card, .cta-box { padding: 24px; }
+      .gallery-card.large,
+      .gallery-card.tall,
+      .gallery-card.wide { min-height: 320px; }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Outdoor Pool & Relax Zone</div>
+          <h1>햇살과 휴식이 머무는<br>실로암 수영장</h1>
+          <p>
+            시원한 물빛과 여유로운 쉼터, 그리고 단체 고객도 편하게 이용할 수 있는 탈의 공간까지.
+            실로암펜션 수영장은 머무는 시간 자체가 좋은 추억이 되도록 구성했습니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn btn-primary">사진으로 둘러보기</a>
+            <a href="#contact" class="btn btn-secondary">예약 문의하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-cards">
+      <div class="container">
+        <div class="card-grid">
+          <div class="glass-card">
+            <strong>프라이빗한 분위기</strong>
+            <span>외부 시선을 줄여 더 편안하게 즐길 수 있는 수영장 공간</span>
+          </div>
+          <div class="glass-card">
+            <strong>여유로운 쉼터 구성</strong>
+            <span>썬베드, 소파형 휴식존, 그늘 공간까지 함께 배치</span>
+          </div>
+          <div class="glass-card">
+            <strong>깔끔한 부대공간</strong>
+            <span>탈의실과 동선까지 한눈에 보기 좋게 정돈된 구성</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="overview">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>수영과 휴식을 함께 즐기는 공간</h2>
+          </div>
+          <p>
+            단순히 물놀이만 하는 공간이 아니라, 사진이 잘 나오고 머무는 분위기까지 좋은
+            실로암펜션의 수영장 존을 소개합니다.
+          </p>
+        </div>
+
+        <div class="feature-layout">
+          <div class="feature-image">
+            <img src="./수영장/수영장 외부.png" alt="수영장 외부 공간" />
+          </div>
+          <div class="feature-copy">
+            <div class="mini">Poolside Mood</div>
+            <h3>초록이 감싸는 시원한 야외 수영장</h3>
+            <p>
+              밝고 청량한 수면 컬러와 정돈된 주변 마감으로 첫인상부터 깔끔하게 느껴지는 공간입니다.
+              수영장 주변에 휴식 의자와 파라솔이 마련되어 있어 물놀이 후에도 편하게 머무를 수 있습니다.
+            </p>
+            <div class="bullet-list">
+              <div class="bullet-item">
+                <div class="bullet-dot"></div>
+                <div>
+                  <strong>쾌적한 동선</strong>
+                  <span>수영장과 휴게 공간이 자연스럽게 이어져 이동이 편리합니다.</span>
+                </div>
+              </div>
+              <div class="bullet-item">
+                <div class="bullet-dot"></div>
+                <div>
+                  <strong>여유로운 분위기</strong>
+                  <span>탁 트인 느낌의 배치로 단체 이용 시에도 답답하지 않습니다.</span>
+                </div>
+              </div>
+              <div class="bullet-item">
+                <div class="bullet-dot"></div>
+                <div>
+                  <strong>사진이 잘 나오는 공간</strong>
+                  <span>청량한 물빛과 정돈된 배경이 어우러져 분위기 있는 컷을 남기기 좋습니다.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>공간별로 보는 수영장 포인트</h2>
+          </div>
+          <p>
+            수영장, 쉼터, 감성적인 연출 공간, 탈의실까지 각각의 분위기를 살려 구성했습니다.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <article class="gallery-card large">
+            <img src="./수영장/수영장 쉼터.png" alt="수영장 쉼터 소파 공간" />
+            <div class="gallery-overlay">
+              <strong>Poolside Lounge</strong>
+              <span>부드러운 쿠션 소파와 우드 펜스로 아늑하게 만든 쉼터 공간</span>
+            </div>
+          </article>
+
+          <article class="gallery-card tall">
+            <img src="./수영장/탈의실.png" alt="수영장 탈의실" />
+            <div class="gallery-overlay">
+              <strong>Changing Room</strong>
+              <span>깔끔한 바닥 마감과 행거 구성으로 편리한 탈의 공간</span>
+            </div>
+          </article>
+
+          <article class="gallery-card wide">
+            <img src="./수영장/수영장 외부1.png" alt="감성적인 수영장 연출 이미지" />
+            <div class="gallery-overlay">
+              <strong>Resort Mood</strong>
+              <span>휴양지 감성을 더해주는 여유로운 무드의 연출 공간</span>
+            </div>
+          </article>
+
+          <article class="gallery-card wide">
+            <img src="./수영장/수영장.png" alt="수영장 전경" />
+            <div class="gallery-overlay">
+              <strong>Refreshing Water View</strong>
+              <span>청량한 수영장 전경으로 페이지 첫인상을 시원하게 완성</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>이용 안내에 넣기 좋은 구성</h2>
+          </div>
+          <p>
+            아래 내용은 홈페이지에서 바로 사용하기 좋은 안내 형식입니다.
+            실제 운영 방식에 맞게 문구만 수정해서 사용하시면 됩니다.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="num">01</div>
+            <h3>운영 기간</h3>
+            <p>시즌 운영 여부와 이용 가능 기간을 계절에 맞춰 안내해주세요.</p>
+          </div>
+          <div class="info-card">
+            <div class="num">02</div>
+            <h3>이용 시간</h3>
+            <p>체크인 후 이용 가능 시간, 야간 이용 가능 여부 등을 함께 적어주세요.</p>
+          </div>
+          <div class="info-card">
+            <div class="num">03</div>
+            <h3>이용 수칙</h3>
+            <p>안전상 주의사항, 어린이 보호자 동반, 음식물 반입 여부 등을 정리하면 좋습니다.</p>
+          </div>
+          <div class="info-card">
+            <div class="num">04</div>
+            <h3>준비 사항</h3>
+            <p>수영복, 아쿠아슈즈, 개인 수건 지참 여부 등 필요한 내용을 간단히 안내해주세요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-content">
+            <div>
+              <h2>실로암펜션 수영장을<br>더 자세히 안내받아보세요</h2>
+              <p>운영 일정, 이용 가능 여부, 예약 문의는 상담을 통해 빠르게 안내해드립니다.</p>
+            </div>
+            <a href="./견적문의.html" class="btn btn-secondary">예약 상담 문의</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© Siloam Pension. All Rights Reserved.</div>
+      <div>수영장 페이지 샘플 · 이미지 중심 랜딩 스타일</div>
+    </div>
+  </footer>
+
+  <script src="./header-loader.js"></script>
+</body>
+</html>

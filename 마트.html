@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실로암펜션 마트 | 편의시설 안내</title>
+    <meta
+      name="description"
+      content="실로암펜션 내 마트 안내 페이지입니다. 운영 시간, 이용 팁, 단체 이용 정보를 확인하세요."
+    />
+    <style>
+      :root {
+        --text: #0f172a;
+        --muted: #64748b;
+        --line: rgba(15, 23, 42, 0.1);
+        --card: rgba(255, 255, 255, 0.9);
+        --primary: #1d4ed8;
+        --max: 1180px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+        color: var(--text);
+        background: linear-gradient(180deg, #f8fbff 0%, #edf2f8 100%);
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      img { display: block; width: 100%; }
+
+      .container {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: 36px 0 18px;
+      }
+
+      .hero-card {
+        border-radius: 28px;
+        overflow: hidden;
+        position: relative;
+        min-height: 420px;
+        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.16);
+      }
+
+      .hero-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        inset: 0;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, rgba(2, 6, 23, 0.72), rgba(30, 64, 175, 0.35));
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        color: white;
+        padding: 44px;
+        max-width: 760px;
+      }
+
+      .kicker {
+        display: inline-block;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 12px 0 16px;
+        line-height: 1.06;
+        letter-spacing: -0.04em;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+      }
+
+      .hero-content p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.75;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .section-title {
+        margin: 0 0 14px;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        letter-spacing: -0.03em;
+      }
+
+      .section-desc {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .discount-banner {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 16px;
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(14, 165, 233, 0.1));
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #0f172a;
+      }
+
+      .discount-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 72px;
+        height: 32px;
+        border-radius: 999px;
+        background: #1d4ed8;
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        box-shadow: 0 10px 24px rgba(29, 78, 216, 0.28);
+      }
+
+      .discount-text {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .grid-2 {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: 22px;
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      .info-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .info-list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 10px;
+        color: #1e293b;
+      }
+
+      .info-list li.discount-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-content: start;
+        gap: 6px;
+        border: 1px solid rgba(37, 99, 235, 0.22);
+        background: rgba(219, 234, 254, 0.62);
+        border-radius: 12px;
+        padding: 14px 14px;
+      }
+
+      .info-list li.discount-row strong {
+        color: #1e3a8a;
+      }
+
+      .info-list li.discount-row span {
+        font-weight: 700;
+        color: #1d4ed8;
+      }
+
+      .info-list li:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .info-list li.discount-row:last-child {
+        border-bottom: 1px solid rgba(37, 99, 235, 0.22);
+        padding-bottom: 14px;
+      }
+
+      .chips {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(29, 78, 216, 0.1);
+        color: var(--primary);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .chip-discount {
+        background: #1d4ed8;
+        color: white;
+        box-shadow: 0 10px 20px rgba(29, 78, 216, 0.25);
+      }
+
+      .gallery {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .gallery img {
+        border-radius: 16px;
+        height: 210px;
+        object-fit: cover;
+      }
+
+      .cta {
+        margin-top: 24px;
+        padding: 22px;
+        border-radius: 18px;
+        background: linear-gradient(130deg, #0f172a, #1e3a8a);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .cta p { margin: 0; color: rgba(255, 255, 255, 0.8); }
+
+      .cta a {
+        background: white;
+        color: #0f172a;
+        border-radius: 999px;
+        padding: 11px 18px;
+        font-weight: 800;
+      }
+
+      @media (max-width: 900px) {
+        .hero-content { padding: 28px; }
+        .discount-banner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .grid-2 { grid-template-columns: 1fr; }
+        .gallery { grid-template-columns: 1fr; }
+        .gallery img { height: 240px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+    <script src="./header-loader.js"></script>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-card">
+            <img src="./부대시설/마트1.png" alt="실로암펜션 마트 전경" />
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+              <span class="kicker">Convenience</span>
+              <h1>마트 편의시설 안내</h1>
+              <p>
+                숙박 중 필요한 생필품부터 간식, 음료까지 한 번에 준비할 수 있도록
+                마트와 카페를 운영하고 있습니다. 단체 일정에 맞춘 이용도 가능합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 class="section-title">운영 정보</h2>
+          <p class="section-desc">
+            현장 상황에 따라 품목 및 운영 시간은 변동될 수 있으며, 단체 이용은 사전 문의를 권장합니다.
+          </p>
+          <div class="discount-banner">
+            <span class="discount-badge">10% 할인</span>
+            <p class="discount-text"><strong>체크인 전 사전 선주문 고객 혜택</strong>으로 전체 주문 금액의 10%를 할인해드립니다.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <div class="card-body">
+                <ul class="info-list">
+                  <li><strong>운영 시간</strong><span>오전 8:00 ~ 오후 11:00</span></li>
+                  <li><strong>주요 품목</strong><span>음료, 주류, 라면, 과자, 생필품</span></li>
+                  <li><strong>결제 방식</strong><span>현금/카드/계좌이체 가능</span></li>
+                  <li><strong>단체 요청</strong><span>사전 주문 및 재고 확보 가능</span></li>
+                  <li class="discount-row"><strong>사전 선주문 혜택</strong><span>체크인 전 선주문 시 10% 할인</span></li>
+                </ul>
+                <div class="chips">
+                  <span class="chip">야식 구매 가능</span>
+                  <span class="chip">냉장 음료 구비</span>
+                  <span class="chip">단체 일정 맞춤 운영</span>
+                  <span class="chip chip-discount">사전 선주문 10% 할인</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <img src="./부대시설/마트5.jpg" alt="실로암펜션 카페 공간" />
+            </article>
+          </div>
+
+          <div class="gallery">
+            <img src="./부대시설/마트2.jpg" alt="마트 상품 진열" />
+            <img src="./부대시설/마트3.jpg" alt="카페 음료 및 휴식 공간" />
+            <img src="./부대시설/마트4.jpg" alt="실내 공용 공간 예시" />
+          </div>
+
+          <div class="cta">
+            <div>
+              <strong>마트/카페 단체 이용 문의</strong>
+              <p>인원과 방문 일정, 필요한 품목을 남겨주시면 빠르게 안내해드리며 선주문 10% 할인 적용 여부도 함께 확인해드립니다.</p>
+            </div>
+            <a href="./main.html#contact">문의 남기기</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
