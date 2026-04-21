@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실로암펜션 | 서류 다운로드</title>
+  <style>
+    :root {
+      --beige: #C3AF97;
+      --ivory: #ECE8E6;
+      --ink: #2f2a26;
+      --muted: #746a61;
+      --line: rgba(195, 175, 151, 0.24);
+      --card: rgba(255,255,255,0.78);
+      --shadow: 0 18px 40px rgba(39, 29, 19, 0.08);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(195,175,151,0.14), transparent 28%),
+        linear-gradient(180deg, #f8f6f4 0%, var(--ivory) 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 120px 0 88px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(195,175,151,0.14), transparent 45%),
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(236,232,230,0.96));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(195,175,151,0.18), transparent 22%),
+        radial-gradient(circle at 10% 90%, rgba(195,175,151,0.12), transparent 26%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .hero-copy {
+      padding: 8px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(195,175,151,0.16);
+      border: 1px solid rgba(195,175,151,0.18);
+      color: #7c6955;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--beige);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(195,175,151,0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(195,175,151,0.22);
+      color: var(--ink);
+    }
+
+    .hero-panel {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-panel h3 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(236,232,230,0.8);
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .hero-list strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .section-title p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    .notice-box {
+      padding: 24px 26px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(248,245,242,0.92));
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .notice-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .notice-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .doc-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .doc-card-head {
+      padding: 24px 24px 18px;
+      background: linear-gradient(135deg, rgba(195,175,151,0.18), rgba(255,255,255,0.28));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .doc-card-head .icon {
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      background: rgba(255,255,255,0.72);
+      color: #8f775d;
+      font-size: 1.4rem;
+      box-shadow: inset 0 0 0 1px rgba(195,175,151,0.14);
+    }
+
+    .doc-card-head h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .doc-card-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .doc-list {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+    }
+
+    .doc-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(195,175,151,0.18);
+    }
+
+    .doc-item h4 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-meta {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .doc-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .doc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 104px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .doc-btn:hover { transform: translateY(-2px); }
+
+    .doc-btn.view {
+      background: #f2ede8;
+      color: var(--ink);
+      border: 1px solid rgba(195,175,151,0.2);
+    }
+
+    .doc-btn.download {
+      background: var(--beige);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(195,175,151,0.22);
+    }
+
+    .helper-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .helper-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(248,245,242,0.92));
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .helper-card strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .helper-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+      margin-top: 28px;
+    }
+
+    .contact-copy h3 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-copy p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #f5f1ee;
+      border: 1px solid rgba(195,175,151,0.18);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .contact-item span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      padding: 32px 0 54px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      padding-top: 22px;
+      border-top: 1px solid rgba(195,175,151,0.22);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-inner,
+      .contact-box,
+      .category-grid,
+      .helper-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding: 100px 0 72px;
+      }
+
+      .hero-card,
+      .hero-panel,
+      .doc-card-head,
+      .doc-list,
+      .contact-box {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .doc-item {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-actions {
+        justify-content: stretch;
+      }
+
+      .doc-btn {
+        width: 100%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">DOCUMENT DOWNLOAD</div>
+          <h1>학교 · 기관 제출용<br>서류 다운로드</h1>
+          <p>
+            단체 펜션 이용 시 학교, 기관, 회사 등에서 요청하는 필수 서류를 한 페이지에서 바로 확인하고 다운로드할 수 있도록 정리했습니다.
+            사업자등록증, 보험증권, 위생 점검 서류, 소방 관련 서류 등을 카테고리별로 편하게 받아가실 수 있습니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#documents" class="btn btn-primary">서류 바로 보기</a>
+            <a href="#contact" class="btn btn-secondary">문의 안내</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <h3>페이지 구성 안내</h3>
+          <ul class="hero-list">
+            <li><strong>사업자 관련</strong><span>사업자등록증 · 통장사본 등</span></li>
+            <li><strong>보험 관련</strong><span>보험증권 · 배상책임 관련 서류</span></li>
+            <li><strong>위생 관련</strong><span>위생 점검표 · 위생교육 확인서</span></li>
+            <li><strong>소방 관련</strong><span>소방점검 · 완비증명 등</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="documents">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>서류 목록</h2>
+          </div>
+          <p>
+            아래 버튼에 연결된 파일 경로만 실제 PDF나 이미지 파일 경로로 바꾸면 바로 운영할 수 있습니다.
+            미리보기와 다운로드 버튼을 각각 분리해두어 사용자 입장에서 더 편하게 사용할 수 있게 구성했습니다.
+          </p>
+        </div>
+
+        <div class="notice-box">
+          <strong>안내사항</strong>
+          <p>
+            제출 기관마다 요구하는 서류 종류가 다를 수 있으니 필요한 문서를 먼저 확인해 주세요.
+            최신본으로 교체가 필요한 경우 파일만 바꿔주면 동일한 페이지에서 계속 사용할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="category-grid">
+          <article class="doc-card">
+            <div class="doc-card-head">
+              <div class="icon">📄</div>
+              <h3>사업자 관련 서류</h3>
+              <p>학교 제출용으로 가장 많이 요청되는 기본 서류입니다.</p>
+            </div>
+            <div class="doc-list">
+              <div class="doc-item">
+                <div>
+                  <h4>사업자등록증</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>최신본 업로드 권장</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/business-license.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/business-license.pdf" download>다운로드</a>
+                </div>
+              </div>
+
+              <div class="doc-item">
+                <div>
+                  <h4>통장사본</h4>
+                  <div class="doc-meta">
+                    <span>PDF 또는 JPG</span>
+                    <span>정산 서류 제출용</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/bank-copy.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/bank-copy.pdf" download>다운로드</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="doc-card">
+            <div class="doc-card-head">
+              <div class="icon">🛡️</div>
+              <h3>보험 관련 서류</h3>
+              <p>행사나 단체 예약 시 요청되는 보험 증빙 문서입니다.</p>
+            </div>
+            <div class="doc-list">
+              <div class="doc-item">
+                <div>
+                  <h4>보험증권</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>대인 · 대물 포함 여부 확인</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/insurance-policy.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/insurance-policy.pdf" download>다운로드</a>
+                </div>
+              </div>
+
+              <div class="doc-item">
+                <div>
+                  <h4>영업배상책임 관련 서류</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>기관 제출용 보조서류</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/liability-insurance.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/liability-insurance.pdf" download>다운로드</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="doc-card">
+            <div class="doc-card-head">
+              <div class="icon">🧼</div>
+              <h3>위생 관련 서류</h3>
+              <p>숙박업 운영과 관련해 요청될 수 있는 위생 서류입니다.</p>
+            </div>
+            <div class="doc-list">
+              <div class="doc-item">
+                <div>
+                  <h4>위생 점검 서류</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>점검일자 확인 필요</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/hygiene-check.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/hygiene-check.pdf" download>다운로드</a>
+                </div>
+              </div>
+
+              <div class="doc-item">
+                <div>
+                  <h4>위생교육 확인서</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>필요 시 추가 업로드</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/hygiene-education.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/hygiene-education.pdf" download>다운로드</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="doc-card">
+            <div class="doc-card-head">
+              <div class="icon">🚒</div>
+              <h3>소방 관련 서류</h3>
+              <p>학교나 기관 측에서 자주 요청하는 안전 관련 서류입니다.</p>
+            </div>
+            <div class="doc-list">
+              <div class="doc-item">
+                <div>
+                  <h4>소방 점검 서류</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>최근 점검본 유지 권장</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/fire-check.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/fire-check.pdf" download>다운로드</a>
+                </div>
+              </div>
+
+              <div class="doc-item">
+                <div>
+                  <h4>소방 완비증명 또는 관련 서류</h4>
+                  <div class="doc-meta">
+                    <span>PDF</span>
+                    <span>기관 요구 시 제출</span>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-btn view" href="./docs/fire-certificate.pdf" target="_blank" rel="noopener">미리보기</a>
+                  <a class="doc-btn download" href="./docs/fire-certificate.pdf" download>다운로드</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="helper-grid">
+          <div class="helper-card">
+            <strong>파일 교체 방법</strong>
+            <p>버튼의 href 경로를 실제 업로드한 PDF 파일명으로 바꾸면 바로 사용 가능합니다.</p>
+          </div>
+          <div class="helper-card">
+            <strong>추천 파일 형식</strong>
+            <p>서류는 PDF 형식으로 정리하면 학교나 기관 담당자가 가장 편하게 열람할 수 있습니다.</p>
+          </div>
+          <div class="helper-card">
+            <strong>최신본 관리</strong>
+            <p>보험증권, 점검서류처럼 갱신되는 문서는 파일만 교체해도 페이지 디자인은 그대로 유지됩니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>추가 서류 문의</h2>
+          </div>
+          <p>
+            페이지에 없는 서류가 필요하거나 최신본 요청이 필요한 경우 아래 연락처로 문의할 수 있도록 안내 문구를 넣어두면 좋습니다.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-copy">
+            <h3>필요한 서류가 목록에 없으신가요?</h3>
+            <p>
+              학교, 관공서, 기관 제출용 추가 서류가 필요하신 경우 예약자명과 요청 서류명을 함께 연락 주시면 확인 후 안내드립니다.
+              운영 상황에 따라 즉시 발급이 어려운 서류는 별도 전달이 필요할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="contact-info">
+            <div class="contact-item">
+              <strong>문의 연락처</strong>
+              <span>010-xxxx-xxxx</span>
+            </div>
+            <div class="contact-item">
+              <strong>안내 가능 시간</strong>
+              <span>오전 9시 ~ 오후 8시</span>
+            </div>
+            <div class="contact-item">
+              <strong>문의 시 전달 내용</strong>
+              <span>예약자명 / 이용일 / 필요 서류명</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© Siloam Pension. All Rights Reserved.</div>
+      <div>서류 다운로드 · Document Download</div>
+    </div>
+  </footer>
+
+  <script src="./header-loader.js"></script>
+</body>
+</html>

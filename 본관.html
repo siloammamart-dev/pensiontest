@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실로암펜션 | 본관 객실안내</title>
+  <style>
+    :root {
+      --beige: #C3AF97;
+      --ivory: #ECE8E6;
+      --sand: #f5f1ee;
+      --ink: #2f2a26;
+      --muted: #7a6f66;
+      --line: rgba(195, 175, 151, 0.22);
+      --shadow: 0 18px 40px rgba(39, 29, 19, 0.08);
+      --radius-xl: 30px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(195,175,151,0.12), transparent 28%),
+        linear-gradient(180deg, #f8f6f4 0%, var(--ivory) 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; height: auto; }
+
+    .container {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+  position: relative;
+  padding: 132px 24px 92px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card {
+  width: min(680px, 100%);
+  margin: 0 auto;
+}
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(195,175,151,0.12), transparent 44%),
+        radial-gradient(circle at right top, rgba(195,175,151,0.14), transparent 32%);
+      pointer-events: none;
+    }
+
+    
+
+    
+
+    .hero-copy {
+      padding: 36px;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(195,175,151,0.12);
+      color: #8f775f;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.5rem, 4.8vw, 4.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero-stat {
+      padding: 20px 18px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(246,241,238,0.88));
+      border: 1px solid rgba(195,175,151,0.16);
+    }
+
+    .hero-stat strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-visual {
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      min-height: 100%;
+      background: #ddd3ca;
+      border: 1px solid rgba(255,255,255,0.92);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+    }
+
+    section { padding: 32px 0 90px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 600px;
+      color: var(--muted);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .filter-chip {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(195,175,151,0.2);
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .filter-chip.active {
+      background: var(--beige);
+      color: #fff;
+      border-color: var(--beige);
+      box-shadow: 0 10px 24px rgba(195,175,151,0.22);
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .room-card {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .room-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 48px rgba(39,29,19,0.12);
+    }
+
+    .room-thumb {
+      position: relative;
+      overflow: hidden;
+      background: #ddd3ca;
+    }
+
+    .room-thumb img {
+      aspect-ratio: 16 / 11;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .room-card:hover .room-thumb img {
+      transform: scale(1.04);
+    }
+
+    .room-badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.84);
+      backdrop-filter: blur(8px);
+      color: #8f775f;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .room-body {
+      padding: 22px 22px 24px;
+    }
+
+    .room-sub {
+      margin: 0 0 6px;
+      color: #b79a7b;
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .room-title {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .room-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .room-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .room-desc {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      min-height: 3.1em;
+    }
+
+    .room-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--beige);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(195,175,151,0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: #f3eeea;
+      color: var(--ink);
+    }
+
+    .btn-ghost:hover {
+      background: #ebe3dc;
+    }
+
+    .notice-box {
+      margin-top: 34px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(246,241,238,0.82));
+      border: 1px solid rgba(195,175,151,0.18);
+      box-shadow: var(--shadow);
+    }
+
+    .notice-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .notice-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      padding: 32px 0 50px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(195,175,151,0.22);
+    }
+
+    @media (max-width: 1180px) {
+      .hero-inner,
+      .room-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-copy {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding: 110px 0 70px;
+      }
+
+      .hero-inner,
+      .room-grid,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        padding: 24px;
+      }
+
+      .hero-visual img {
+        min-height: 320px;
+      }
+
+      .section-head,
+      .footer-inner,
+      .room-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>본관 객실 리스트</h2>
+          </div>
+          <p>
+            지금은 본관 객실 12개가 동일한 스타일로 정리되어 있고,
+            사진과 상세 정보는 각 객실에 맞게 교체해서 사용할 수 있도록 만들어두었습니다.
+          </p>
+        </div>
+
+        <div class="filter-bar">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">본관 객실</span>
+          <span class="filter-chip">단체 숙박</span>
+          <span class="filter-chip">가족 숙박</span>
+        </div>
+
+        <div class="room-grid">
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 201호 보정/자연 채광이 가득한 넓은 실내공간.png" alt="본관 201호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">201호</h3>
+              <div class="room-meta">
+                <span>👥 기준 60인 / 최대 180인</span>
+                <span>📐 115㎡</span>
+              </div>
+              <p class="room-desc">거실형 구조와 자연 채광이 돋보이는 객실입니다.</p>
+              <div class="room-actions">
+                <a href="./본관201호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 교체 예정</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 202호 보정/넓고 모던한 다목적 공간.png" alt="본관 202호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">202호</h3>
+              <div class="room-meta">
+                <span>👥 기준 40인 / 최대 100인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관202호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 205호 보정/메인.png" alt="본관 203호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">205호</h3>
+              <div class="room-meta">
+                <span>👥 기준 35인 / 최대 70인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관205호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 301호 보정/넓고 밝은 거실 풍경.png" alt="본관 204호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">301호</h3>
+              <div class="room-meta">
+                <span>👥 기준 8인 / 최대 18인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관301호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 302호 보정/자연광이 비추는 아늑한 실내.png" alt="본관 205호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">302호</h3>
+              <div class="room-meta">
+                <span>👥 기준 6인 / 최대 12인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관302호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 303호 보정/메인.png" alt="본관 206호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">303호</h3>
+              <div class="room-meta">
+                <span>👥 기준 6인 / 최대 12인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관303호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 304호 보정/메인.png" alt="본관 207호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">304호</h3>
+              <div class="room-meta">
+                <span>👥 기준 10인 / 최대 28인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관304호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 305호 보정/메인.png" alt="본관 208호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">305호</h3>
+              <div class="room-meta">
+                <span>👥 기준 10인 / 최대 28인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관305호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 306호 보정/메인.png" alt="본관 209호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">306호</h3>
+              <div class="room-meta">
+                <span>👥 기준 40인 / 최대 100인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관306호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 307호 보정/메인.png" alt="본관 210호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">307호</h3>
+              <div class="room-meta">
+                <span>👥 기준 10인 / 최대 30인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관307호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 308호 보정/메인.png" alt="본관 211호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">308호</h3>
+              <div class="room-meta">
+                <span>👥 기준 10인 / 최대 30인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관308호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <div class="room-thumb">
+              <img src="./본관/본관 309호 보정/메인.png" alt="본관 212호" />
+              <span class="room-badge">MAIN BUILDING</span>
+            </div>
+            <div class="room-body">
+              <p class="room-sub">본관 객실</p>
+              <h3 class="room-title">309호</h3>
+              <div class="room-meta">
+                <span>👥 기준 10인 / 최대 30인</span>
+                <span>📐 면적 입력</span>
+              </div>
+              <p class="room-desc">객실 설명을 입력하세요.</p>
+              <div class="room-actions">
+                <a href="./본관309호.html" class="btn btn-primary">상세보기</a>
+                <a href="#" class="btn btn-ghost">사진 추가</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="notice-box">
+          <strong>사용 방법</strong>
+          <p>
+            이 페이지는 본관 객실 전체 목록 페이지로 사용하고, 각 카드의 상세보기 버튼을 누르면 개별 객실 페이지로 이동하도록 연결하면 됩니다.
+            사진은 나중에 교체하신다고 하셨으니 현재는 201호만 실제 이미지가 들어가 있고, 나머지는 교체용 경로로 비워두었습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© Siloam Pension. All Rights Reserved.</div>
+      <div>본관 객실 목록 페이지</div>
+    </div>
+  </footer>
+
+  <script src="./header-loader.js"></script>
+</body>
+</html>
