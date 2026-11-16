@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>실로암펜션 | 본관 201호</title>
+
   <style>
     :root {
       --beige: #C3AF97;
@@ -17,8 +18,13 @@
       --radius-md: 18px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -27,11 +33,20 @@
       background:
         radial-gradient(circle at top left, rgba(195,175,151,0.14), transparent 30%),
         linear-gradient(180deg, #f8f6f4 0%, var(--ivory) 100%);
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 18px;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { display: block; width: 100%; height: auto; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
     .container {
       width: min(1200px, calc(100% - 32px));
@@ -42,31 +57,13 @@
       position: relative;
       min-height: 88vh;
       display: flex;
-      align-items: end;
-      justify-content: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       color: #fff;
       background:
-        linear-gradient(180deg, rgba(31, 25, 21, 0.1), rgba(31, 25, 21, 0.7)),
-        url('./본관/본관 201호 보정/자연 채광이 가득한 넓은 실내공간.png') center/cover no-repeat;
+        linear-gradient(180deg, rgba(31, 25, 21, 0.08), rgba(31, 25, 21, 0.58)),
+        url('../본관/본관 201호 보정/자연 채광이 가득한 넓은 실내공간.png') center/cover no-repeat;
       overflow: hidden;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: min(1200px, calc(100% - 48px));
-      padding: 0 0 90px;
-    }
-
-    .hero-card {
-      width: min(760px, 100%);
-      margin: 0 auto;
-      padding: 30px 32px;
-      border-radius: var(--radius-xl);
-      background: rgba(20, 17, 15, 0.34);
-      border: 1px solid rgba(255,255,255,0.18);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.16);
     }
 
     .hero::after {
@@ -77,6 +74,26 @@
       pointer-events: none;
     }
 
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1200px, calc(100% - 48px));
+      padding: 130px 0 0;
+    }
+
+    .hero-card {
+      width: fit-content;
+      min-width: 300px;
+      max-width: 500px;
+      margin: 0;
+      padding: 26px 30px 28px;
+      border-radius: 24px;
+      background: rgba(20, 17, 15, 0.34);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.16);
+    }
+
     .eyebrow {
       display: inline-block;
       margin-bottom: 14px;
@@ -85,55 +102,16 @@
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.18);
       font-weight: 800;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       letter-spacing: 0.06em;
     }
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.7rem, 5vw, 5rem);
+      font-size: clamp(2.8rem, 5vw, 5rem);
       line-height: 1.02;
       letter-spacing: -0.05em;
       font-weight: 900;
-    }
-
-    .hero p {
-      margin: 16px 0 0;
-      max-width: 620px;
-      color: rgba(255,255,255,0.9);
-      font-size: 1.05rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
-      font-weight: 800;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: var(--beige);
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(195,175,151,0.28);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.13);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .floating-info {
@@ -149,7 +127,7 @@
     }
 
     .floating-item {
-      padding: 22px;
+      padding: 24px;
       border-radius: 24px;
       background: rgba(255,255,255,0.78);
       border: 1px solid rgba(255,255,255,0.9);
@@ -159,17 +137,19 @@
 
     .floating-item strong {
       display: block;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       color: var(--ink);
-      font-size: 1rem;
+      font-size: 1.15rem;
     }
 
     .floating-item span {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: var(--muted);
     }
 
-    section { padding: 92px 0; }
+    section {
+      padding: 92px 0;
+    }
 
     .section-title {
       display: flex;
@@ -181,7 +161,7 @@
 
     .section-title h2 {
       margin: 0;
-      font-size: clamp(2rem, 3vw, 3.2rem);
+      font-size: clamp(2.4rem, 3.4vw, 3.6rem);
       line-height: 1.08;
       letter-spacing: -0.04em;
     }
@@ -190,6 +170,7 @@
       margin: 0;
       max-width: 540px;
       color: var(--muted);
+      font-size: 1.08rem;
     }
 
     .room-info-box {
@@ -201,7 +182,7 @@
     }
 
     .room-info-head {
-      padding: 28px 30px 22px;
+      padding: 32px 34px 26px;
       border-bottom: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(195,175,151,0.22), rgba(255,255,255,0.3));
     }
@@ -209,14 +190,14 @@
     .room-info-head h3 {
       margin: 0;
       color: #b56c2e;
-      font-size: 2rem;
+      font-size: 2.4rem;
       line-height: 1;
       letter-spacing: -0.03em;
     }
 
     .room-info-head p {
-      margin: 14px 0 0;
-      font-size: 0.98rem;
+      margin: 16px 0 0;
+      font-size: 1.08rem;
       color: var(--ink);
       font-weight: 600;
     }
@@ -238,19 +219,20 @@
     .info-card label,
     .wide-card label {
       display: block;
-      padding: 12px 14px;
-      font-size: 0.9rem;
+      padding: 14px 16px;
+      font-size: 1.05rem;
       font-weight: 800;
       color: #4b443e;
     }
 
     .info-card div,
     .wide-card div {
-      padding: 14px;
+      padding: 16px;
       background: #fff;
       color: #5a5048;
       font-weight: 600;
-      min-height: 56px;
+      font-size: 1.08rem;
+      min-height: 62px;
     }
 
     .wide-card {
@@ -269,33 +251,32 @@
 
     .amenity-group {
       border-radius: 22px;
-      padding: 20px;
+      padding: 22px;
       background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(248,245,242,0.92));
       border: 1px solid rgba(195,175,151,0.16);
     }
 
     .amenity-group h4 {
-      margin: 0 0 10px;
-      font-size: 1rem;
+      margin: 0 0 12px;
+      font-size: 1.18rem;
       color: var(--ink);
     }
 
     .amenity-group p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 1.05rem;
     }
 
-    /* gallery */
     .gallery-wrap {
       display: grid;
       gap: 24px;
     }
 
     .gallery-top-text {
-      max-width: 760px;
+      max-width: 820px;
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 1.12rem;
       line-height: 1.9;
     }
 
@@ -362,22 +343,22 @@
     }
 
     .slider-title-badge {
-      padding: 8px 14px;
+      padding: 9px 16px;
       border-radius: 999px;
       background: rgba(20,17,15,0.56);
       color: #fff;
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 1.02rem;
       backdrop-filter: blur(8px);
     }
 
     .slider-count {
-      padding: 8px 14px;
+      padding: 9px 16px;
       border-radius: 999px;
       background: rgba(20,17,15,0.4);
       color: #fff;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 1.02rem;
       backdrop-filter: blur(8px);
     }
 
@@ -416,9 +397,9 @@
 
     .thumb-btn span {
       display: block;
-      padding: 10px 8px 12px;
+      padding: 12px 8px 14px;
       text-align: center;
-      font-size: 0.84rem;
+      font-size: 0.98rem;
       font-weight: 700;
       color: var(--ink);
       background: #fff;
@@ -432,7 +413,7 @@
     }
 
     .highlight-card {
-      padding: 22px;
+      padding: 24px;
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(248,245,242,0.86));
       border: 1px solid rgba(255,255,255,0.9);
@@ -441,19 +422,19 @@
 
     .highlight-card strong {
       display: block;
-      margin-bottom: 8px;
-      font-size: 1.04rem;
+      margin-bottom: 10px;
+      font-size: 1.18rem;
     }
 
     .highlight-card span {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1.05rem;
     }
 
     .footer {
       padding: 32px 0 54px;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 1rem;
     }
 
     .footer-inner {
@@ -467,7 +448,9 @@
     @media (max-width: 1100px) {
       .floating-grid,
       .highlight-grid,
-      .info-grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .info-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
       .thumb-strip {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -480,6 +463,10 @@
     }
 
     @media (max-width: 760px) {
+      body {
+        font-size: 16px;
+      }
+
       .floating-grid,
       .highlight-grid,
       .info-grid-3,
@@ -487,10 +474,50 @@
         grid-template-columns: 1fr;
       }
 
-      .hero { min-height: 72vh; }
+      .hero {
+        min-height: 72vh;
+      }
 
-      .hero-card,
-      .room-info-head,
+      .hero-inner {
+        width: min(100% - 32px, 1200px);
+        padding: 96px 0 0;
+      }
+
+      .hero-card {
+        min-width: 0;
+        max-width: 320px;
+        padding: 18px 20px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .eyebrow {
+        font-size: 0.82rem;
+      }
+
+      .floating-item strong {
+        font-size: 1.05rem;
+      }
+
+      .floating-item span {
+        font-size: 0.98rem;
+      }
+
+      .room-info-head {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .room-info-head h3 {
+        font-size: 2rem;
+      }
+
+      .room-info-head p {
+        font-size: 1rem;
+      }
+
       .amenity-group {
         padding-left: 20px;
         padding-right: 20px;
@@ -503,9 +530,26 @@
         padding-right: 16px;
       }
 
-      section { padding: 72px 0; }
+      .info-card label,
+      .wide-card label {
+        font-size: 0.98rem;
+      }
 
-      .footer-inner { flex-direction: column; }
+      .info-card div,
+      .wide-card div,
+      .amenity-group p,
+      .gallery-top-text,
+      .highlight-card span {
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
 
       .slider-arrow {
         width: 58px;
@@ -513,8 +557,13 @@
         font-size: 2rem;
       }
 
-      .slider-arrow.prev { left: 12px; }
-      .slider-arrow.next { right: 12px; }
+      .slider-arrow.prev {
+        left: 12px;
+      }
+
+      .slider-arrow.next {
+        right: 12px;
+      }
 
       .slider-caption {
         left: 14px;
@@ -530,6 +579,7 @@
     }
   </style>
 </head>
+
 <body>
   <div id="site-header"></div>
 
@@ -539,14 +589,6 @@
         <div class="hero-card">
           <div class="eyebrow">MAIN BUILDING ROOM</div>
           <h1>본관 201호</h1>
-          <p>
-            넓은 거실형 구조와 대형 창으로 들어오는 자연 채광이 매력적인 객실입니다.
-            단체 모임과 가족 숙박 모두 편안하게 이용할 수 있도록 깔끔하고 여유로운 공간감으로 구성했습니다.
-          </p>
-          <div class="hero-actions">
-            <a href="#room-info" class="btn btn-primary">Room Info 보기</a>
-            <a href="#gallery" class="btn btn-secondary">객실 사진 보기</a>
-          </div>
         </div>
       </div>
     </section>
@@ -558,14 +600,17 @@
             <strong>입·퇴실시간</strong>
             <span>입실 오후 3시, 퇴실 오전 11시</span>
           </div>
+
           <div class="floating-item">
             <strong>인원</strong>
             <span>기준 60명, 최대 180명</span>
           </div>
+
           <div class="floating-item">
             <strong>면적</strong>
             <span>115㎡</span>
           </div>
+
           <div class="floating-item">
             <strong>객실 타입</strong>
             <span>거실 + 침대방1 + 화장실4 + 주방</span>
@@ -577,12 +622,8 @@
     <section id="room-info">
       <div class="container">
         <div class="section-title">
-          <div>
-            
-          </div>
-          <p>
-            
-          </p>
+          <div></div>
+          <p></p>
         </div>
 
         <div class="room-info-box">
@@ -599,10 +640,12 @@
               <label>입 · 퇴실시간</label>
               <div>입실 오후 3시, 퇴실 오전 11시</div>
             </div>
+
             <div class="info-card">
               <label>인원</label>
               <div>기준 60명, 최대 180명</div>
             </div>
+
             <div class="info-card">
               <label>면적</label>
               <div>115㎡</div>
@@ -619,18 +662,27 @@
               <h4>구비물품</h4>
               <p>타올류, 테이블, 기본 생활용품</p>
             </div>
+
             <div class="amenity-group">
               <h4>전자제품류</h4>
               <p>75인치 TV, 에어컨 2대, 인덕션, 밥솥, 버너, 전자레인지</p>
             </div>
+
             <div class="amenity-group">
               <h4>주방용품</h4>
-              <p>크기별 접시, 밥그릇, 국그릇, 와인잔, 맥주잔, 유리컵, 소주잔, 국자, 수저, 젓가락, 와인오프너, 집게, 포크, 티스푼, 가위, 주방용칼, 도마, 스트레이스푼, 칼개, 냄비받침대, 주방용수세미, 주방세제 등</p>
+              <p>
+                크기별 접시, 밥그릇, 국그릇, 와인잔, 맥주잔, 유리컵, 소주잔,
+                국자, 수저, 젓가락, 와인오프너, 집게, 포크, 티스푼, 가위,
+                주방용칼, 도마, 스트레이스푼, 칼개, 냄비받침대,
+                주방용수세미, 주방세제 등
+              </p>
             </div>
+
             <div class="amenity-group">
               <h4>욕실용품</h4>
               <p>샴푸, 컨디셔너, 바디워시, 일회용비누, 일회용치약 등</p>
             </div>
+
             <div class="amenity-group">
               <h4>비치물품</h4>
               <p>휴지, 탈취제, 드라이기, 파리채, 삼겹집게 등</p>
@@ -646,9 +698,7 @@
           <div>
             <h2>객실 사진</h2>
           </div>
-          <p>
-            
-          </p>
+          <p></p>
         </div>
 
         <div class="gallery-wrap">
@@ -661,7 +711,7 @@
             <div class="slider-stage">
               <button class="slider-arrow prev" id="prevBtn" type="button" aria-label="이전 사진">&#10094;</button>
 
-              <img id="mainImage" src="./본관/본관 201호 보정/넓고 깔끔한 실내 공간.png" alt="거실 전경" />
+              <img id="mainImage" src="../본관/본관 201호 보정/넓고 깔끔한 실내 공간.png" alt="거실 전경" />
 
               <button class="slider-arrow next" id="nextBtn" type="button" aria-label="다음 사진">&#10095;</button>
 
@@ -680,10 +730,12 @@
             <strong>넓은 거실형 공간</strong>
             <span>단체 숙박이나 모임 시에도 여유롭게 사용할 수 있는 대형 실내 공간입니다.</span>
           </div>
+
           <div class="highlight-card">
             <strong>주방·식사공간 포함</strong>
             <span>간단한 조리와 식사 준비가 가능하도록 주방과 냉장고, 식탁이 함께 배치되어 있습니다.</span>
           </div>
+
           <div class="highlight-card">
             <strong>밝고 깔끔한 침실</strong>
             <span>침실과 욕실 모두 밝은 톤으로 정리해 편안하고 깔끔한 느낌을 주도록 구성했습니다.</span>
@@ -702,24 +754,24 @@
 
   <script>
     const roomImages = [
-      { src: './본관/본관 201호 보정/넓고 깔끔한 실내 공간.png', title: '거실 전경' },
-      { src: './본관/본관 201호 보정/자연 채광이 가득한 넓은 실내공간.png', title: '자연 채광 거실' },
-      { src: './본관/본관 201호 보정/넓고 깔끔한 일광이 비춘 방.png', title: '채광이 좋은 실내' },
-      { src: './본관/본관 201호 보정/넓고 깔끔한 회의실 공간.png', title: '다목적 거실 공간' },
-      { src: './본관/본관 201호 보정/다목적룸과 자연광의 조화.png', title: '다목적룸' },
-      { src: './본관/본관 201호 보정/모던한 거실의 밝은 풍경.png', title: '거실 측면' },
-      { src: './본관/본관 201호 보정/밝고 넓은 다목적 회의실.png', title: '대형 거실' },
-      { src: './본관/본관 201호 보정/밝은 다목적 방의 모습.png', title: '프로젝터 공간' },
-      { src: './본관/본관 201호 보정/아름다운 인테리어와 식물 배치.png', title: '실내 인테리어' },
-      { src: './본관/본관 201호 보정/모던한 L자형 주방 디자인.png', title: '주방 1' },
-      { src: './본관/본관 201호 보정/모던한 주방과 식사 공간.png', title: '주방 2' },
-      { src: './본관/본관 201호 보정/모던한 주방의 세련된 조화.png', title: '주방 3' },
-      { src: './본관/본관 201호 보정/밝고 깔끔한 침실 모습.png', title: '침실 1' },
-      { src: './본관/본관 201호 보정/밝은 색깔의 아침 침실.png', title: '침실 2' },
-      { src: './본관/본관 201호 보정/밝은 침실의 따뜻한 분위기.png', title: '침실 3' },
-      { src: './본관/본관 201호 보정/모던한 욕실 디자인.png', title: '욕실 1' },
-      { src: './본관/본관 201호 보정/모던한 욕실 인테리어.png', title: '욕실 2' },
-      { src: './본관/본관 201호 보정/모던한 욕실과 분리된 화장실.png', title: '세면 공간' }
+      { src: '../본관/본관 201호 보정/넓고 깔끔한 실내 공간.png', title: '거실 전경' },
+      { src: '../본관/본관 201호 보정/자연 채광이 가득한 넓은 실내공간.png', title: '자연 채광 거실' },
+      { src: '../본관/본관 201호 보정/넓고 깔끔한 일광이 비춘 방.png', title: '채광이 좋은 실내' },
+      { src: '../본관/본관 201호 보정/넓고 깔끔한 회의실 공간.png', title: '다목적 거실 공간' },
+      { src: '../본관/본관 201호 보정/다목적룸과 자연광의 조화.png', title: '다목적룸' },
+      { src: '../본관/본관 201호 보정/모던한 거실의 밝은 풍경.png', title: '거실 측면' },
+      { src: '../본관/본관 201호 보정/밝고 넓은 다목적 회의실.png', title: '대형 거실' },
+      { src: '../본관/본관 201호 보정/밝은 다목적 방의 모습.png', title: '프로젝터 공간' },
+      { src: '../본관/본관 201호 보정/아름다운 인테리어와 식물 배치.png', title: '실내 인테리어' },
+      { src: '../본관/본관 201호 보정/모던한 L자형 주방 디자인.png', title: '주방 1' },
+      { src: '../본관/본관 201호 보정/모던한 주방과 식사 공간.png', title: '주방 2' },
+      { src: '../본관/본관 201호 보정/모던한 주방의 세련된 조화.png', title: '주방 3' },
+      { src: '../본관/본관 201호 보정/밝고 깔끔한 침실 모습.png', title: '침실 1' },
+      { src: '../본관/본관 201호 보정/밝은 색깔의 아침 침실.png', title: '침실 2' },
+      { src: '../본관/본관 201호 보정/밝은 침실의 따뜻한 분위기.png', title: '침실 3' },
+      { src: '../본관/본관 201호 보정/모던한 욕실 디자인.png', title: '욕실 1' },
+      { src: '../본관/본관 201호 보정/모던한 욕실 인테리어.png', title: '욕실 2' },
+      { src: '../본관/본관 201호 보정/모던한 욕실과 분리된 화장실.png', title: '세면 공간' }
     ];
 
     const mainImage = document.getElementById('mainImage');
@@ -753,10 +805,12 @@
 
     function updateViewer() {
       const image = roomImages[currentIndex];
+
       mainImage.src = image.src;
       mainImage.alt = image.title;
       imageTitle.textContent = image.title;
       counter.textContent = `${formatCount(currentIndex + 1)} / ${formatCount(roomImages.length)}`;
+
       renderThumbs();
     }
 
@@ -778,6 +832,33 @@
     updateViewer();
   </script>
 
-  <script src="./header-loader.js"></script>
+  <script>
+    (() => {
+      const mountNode = document.querySelector("#site-header");
+      if (!mountNode) return;
+
+      fetch("../header.html")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`header load failed: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((html) => {
+          const fixedHtml = html
+            .replaceAll('href="./', 'href="../')
+            .replaceAll("href='./", "href='../")
+            .replaceAll('src="./', 'src="../')
+            .replaceAll("src='./", "src='../")
+            .replaceAll("url('./", "url('../")
+            .replaceAll('url("./', 'url("../');
+
+          mountNode.innerHTML = fixedHtml;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    })();
+  </script>
 </body>
 </html>
