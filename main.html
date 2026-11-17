@@ -265,15 +265,16 @@
       .about-stage {
         position: relative;
         z-index: 1;
-        width: min(1680px, calc(100% - 8px));
+        width: calc(100% - 12px);
         margin: 0 auto;
         display: grid;
-        grid-template-columns: minmax(240px, 1fr) minmax(300px, 440px) minmax(240px, 1fr);
-        gap: 56px;
+        grid-template-columns: minmax(0, 1fr) 320px minmax(0, 1fr);
+        gap: 24px;
         align-items: center;
         min-height: 720px;
       }
-      .about-copy { text-align: center; }
+      .about-copy { text-align: center; min-width: 0; }
+      .about-copy h2 { font-size: clamp(25px, 2.4vw, 40px); }
       .about-copy .quote {
         margin: 32px auto;
         padding: 0;
@@ -321,6 +322,11 @@
         border-radius: 28px;
         overflow: hidden;
         height: 640px;
+        width: 80%;
+      }
+      .about-side-right figure {
+        margin-left: auto;
+        margin-right: -6px;
       }
 
       .vibe {
@@ -372,10 +378,10 @@
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: minmax(240px, 0.7fr) minmax(360px, 1.3fr);
-        gap: 40px;
+        grid-template-columns: minmax(340px, 0.62fr) minmax(0, 1.55fr);
+        gap: 36px;
         align-items: center;
-        width: min(1240px, calc(100% - 32px));
+        width: min(1360px, calc(100% - 24px));
         margin: 0 auto;
       }
       .vibe-kicker {
@@ -423,24 +429,25 @@
       }
       .vibe-switch button.active { background: #2c3a34; color: #eef3ee; }
       .vibe.is-winter .vibe-switch button.active { background: #2c3a34; color: #eef3ee; }
-      .vibe-collage { position: relative; height: 580px; }
+      .vibe-collage {
+        display: grid;
+        grid-template-columns: 0.82fr 1fr 1.08fr;
+        align-items: end;
+        gap: 16px;
+      }
       .vibe-photo {
-        position: absolute;
+        position: relative;
         margin: 0;
         overflow: hidden;
-        border-radius: 6px;
+        border-radius: 22px;
         background: #d7e2da;
         box-shadow: 0 18px 36px rgba(30, 40, 40, 0.14);
       }
       .vibe.is-winter .vibe-photo { background: #d5e0e6; }
-      .vibe-switch { flex-wrap: wrap; }
-      .vibe-photo.main,
-      .vibe-photo.sub {
-        width: calc(50% - 14px);
-        height: 500px;
-      }
-      .vibe-photo.main { left: 0; top: 0; }
-      .vibe-photo.sub { right: 0; bottom: 0; }
+      .vibe-switch { flex-wrap: nowrap; }
+      .vibe-photo.step-1 { height: 340px; }
+      .vibe-photo.step-2 { height: 470px; }
+      .vibe-photo.step-3 { height: 560px; }
       .vibe-photo img {
         position: absolute;
         inset: 0;
@@ -493,16 +500,24 @@
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 56px;
+        grid-template-columns: auto minmax(0, 1fr);
         align-items: center;
-        width: min(1180px, calc(100% - 48px));
-        margin: 0 auto;
+        width: calc(100% - 16px);
+        margin: 0 8px 0 auto;
+      }
+      .room-visual { position: relative; width: min(780px, calc(100vw - 608px)); margin-left: 4cm; }
+      .room-copy {
+        width: auto;
+        max-width: 620px;
+        justify-self: end;
+        margin-left: auto;
+        margin-right: clamp(48px, 18vw, 300px);
       }
       .room-photo {
+        position: relative;
         border-radius: 6px;
         overflow: hidden;
-        aspect-ratio: 5 / 4;
+        aspect-ratio: 16 / 10;
         background: #e6e0d8;
       }
       .room-photo img {
@@ -562,10 +577,10 @@
       .room-row {
         width: 100%;
         display: grid;
-        grid-template-columns: 132px 1fr 40px;
+        grid-template-columns: 1.05fr 1.7fr 1.25fr 40px;
         align-items: center;
-        gap: 12px;
-        padding: 18px 4px;
+        column-gap: 18px;
+        padding: 18px 0;
         border: 0;
         border-top: 1px solid rgba(43, 43, 43, 0.12);
         background: transparent;
@@ -576,9 +591,8 @@
         transition: color 0.35s ease;
       }
       .room-row:last-child { border-bottom: 1px solid rgba(43, 43, 43, 0.12); }
-      .room-row strong { font-weight: 600; letter-spacing: 0.04em; }
-      .room-row .facts { display: flex; gap: 16px; justify-content: flex-end; flex-wrap: wrap; }
-      .room-row .facts span { display: inline-flex; align-items: center; gap: 6px; }
+      .room-row strong { font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; }
+      .room-row .fact { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
       .room-row svg { width: 15px; height: 15px; }
       .room-row .arrow {
         width: 36px;
@@ -902,16 +916,19 @@
         .header.open .reserve-btn { display: inline-flex; margin: 8px 24px 20px; }
         .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
         .package-grid, .split-grid, .room-board, .facility-board { grid-template-columns: 1fr; }
+        .room-board { width: min(100% - 32px, 720px); margin: 0 auto; grid-template-columns: 1fr; }
+        .room-visual, .room-copy { width: 100%; margin-right: 0; margin-left: 0; }
         .footer-bar { flex-direction: column; align-items: flex-start; }
         .about { padding: 88px 0 96px; }
         .about-stage { grid-template-columns: 1fr; min-height: 0; gap: 28px; }
         .about-copy { order: -1; }
-        .about-side figure { height: 280px; }
+        .about-side figure { height: 280px; width: 100%; margin-right: 0; }
         .watermark, .rooms-mark, .facility-mark { display: none; }
         .vibe-board { grid-template-columns: 1fr; gap: 28px; width: min(100% - 32px, 720px); }
-        .vibe-collage { height: 440px; }
-        .vibe-photo.main,
-        .vibe-photo.sub { width: calc(50% - 10px); height: 360px; }
+        .vibe-collage { grid-template-columns: 0.82fr 1fr 1.08fr; gap: 10px; }
+        .vibe-photo.step-1 { height: 190px; }
+        .vibe-photo.step-2 { height: 250px; }
+        .vibe-photo.step-3 { height: 300px; }
       }
       @media (max-width: 640px) {
         .header .logo, .header .logo img { height: 52px; }
@@ -1029,17 +1046,23 @@
             </div>
           </div>
           <div class="vibe-collage">
-            <figure class="vibe-photo main">
-              <img class="for-spring" src="./figma-media/aerial.jpg" alt="봄, 큰 사진" />
-              <img class="for-summer" src="./figma-media/content-1.jpg" alt="여름, 큰 사진" />
-              <img class="for-autumn" src="./figma-media/content-3.jpg" alt="가을, 큰 사진" />
-              <img class="for-winter" src="./figma-media/content-7.jpg" alt="겨울, 큰 사진" />
+            <figure class="vibe-photo step-1">
+              <img class="for-spring" src="./figma-media/content-8.jpg" alt="봄, 왼쪽 사진" />
+              <img class="for-summer" src="./figma-media/content-2.jpg" alt="여름, 왼쪽 사진" />
+              <img class="for-autumn" src="./figma-media/content-6.jpg" alt="가을, 왼쪽 사진" />
+              <img class="for-winter" src="./figma-media/content-4.jpg" alt="겨울, 왼쪽 사진" />
             </figure>
-            <figure class="vibe-photo sub">
-              <img class="for-spring" src="./figma-media/content-8.jpg" alt="봄, 작은 사진" />
-              <img class="for-summer" src="./figma-media/content-2.jpg" alt="여름, 작은 사진" />
-              <img class="for-autumn" src="./figma-media/content-6.jpg" alt="가을, 작은 사진" />
-              <img class="for-winter" src="./figma-media/content-4.jpg" alt="겨울, 작은 사진" />
+            <figure class="vibe-photo step-2">
+              <img class="for-spring" src="./figma-media/aerial.jpg" alt="봄, 가운데 사진" />
+              <img class="for-summer" src="./figma-media/content-1.jpg" alt="여름, 가운데 사진" />
+              <img class="for-autumn" src="./figma-media/content-3.jpg" alt="가을, 가운데 사진" />
+              <img class="for-winter" src="./figma-media/content-7.jpg" alt="겨울, 가운데 사진" />
+            </figure>
+            <figure class="vibe-photo step-3">
+              <img class="for-spring" src="./figma-media/content-5.jpg" alt="봄, 오른쪽 사진" />
+              <img class="for-summer" src="./figma-media/content-9.jpg" alt="여름, 오른쪽 사진" />
+              <img class="for-autumn" src="./figma-media/content-33.jpg" alt="가을, 오른쪽 사진" />
+              <img class="for-winter" src="./figma-media/content-32.jpg" alt="겨울, 오른쪽 사진" />
             </figure>
           </div>
         </div>
@@ -1048,7 +1071,7 @@
       <section class="rooms reveal" id="rooms">
         <p class="rooms-mark" aria-hidden="true">Room<span>FOR THE GROUP</span></p>
         <div class="room-board">
-          <div>
+          <div class="room-visual">
             <div class="room-photo">
               <img id="room-image" src="./figma-media/room-1.jpg" alt="본관 201호" />
             </div>
@@ -1063,28 +1086,6 @@
             <p>단체 모임과 워크샵을 위한 본관 객실.<br />규모와 용도에 맞춰 고른 4개 공간을 소개합니다.</p>
             <a class="room-more" id="room-more" href="./본관 상세페이지/본관201호.html">view more</a>
             <div class="room-list" id="room-list"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="facilities reveal" id="facilities">
-        <p class="facility-mark" aria-hidden="true">Facility<span>FOR THE STAY</span></p>
-        <div class="facility-board">
-          <div class="facility-copy">
-            <h2>Facility</h2>
-            <p>내 아이와 가족이 함께하는 완벽한 휴가의 첫걸음.<br />하루를 알차게 채워줄 부대시설들을 소개합니다.</p>
-            <a class="facility-more" id="facility-more" href="./숯불세트.html">view more</a>
-            <div class="facility-progress">
-              <i></i>
-              <span id="facility-count"><b>01</b> / 04</span>
-            </div>
-          </div>
-          <div class="facility-stage">
-            <button class="facility-nav prev" id="facility-prev" type="button" aria-label="이전 시설">←</button>
-            <div class="facility-viewport" id="facility-viewport">
-              <div class="facility-track" id="facility-track"></div>
-            </div>
-            <button class="facility-nav next" id="facility-next" type="button" aria-label="다음 시설">→</button>
           </div>
         </div>
       </section>
@@ -1174,6 +1175,28 @@
           </div>
         </div>
       </section>
+
+      <section class="facilities reveal" id="facilities">
+        <p class="facility-mark" aria-hidden="true">Facility<span>FOR THE STAY</span></p>
+        <div class="facility-board">
+          <div class="facility-copy">
+            <h2>Facility</h2>
+            <p>내 아이와 가족이 함께하는 완벽한 휴가의 첫걸음.<br />하루를 알차게 채워줄 부대시설들을 소개합니다.</p>
+            <a class="facility-more" id="facility-more" href="./숯불세트.html">view more</a>
+            <div class="facility-progress">
+              <i></i>
+              <span id="facility-count"><b>01</b> / 04</span>
+            </div>
+          </div>
+          <div class="facility-stage">
+            <button class="facility-nav prev" id="facility-prev" type="button" aria-label="이전 시설">←</button>
+            <div class="facility-viewport" id="facility-viewport">
+              <div class="facility-track" id="facility-track"></div>
+            </div>
+            <button class="facility-nav next" id="facility-next" type="button" aria-label="다음 시설">→</button>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -1249,7 +1272,8 @@
       roomList.innerHTML = rooms.map((room, index) => `
         <button class="room-row${index === 0 ? " active" : ""}" type="button">
           <strong>${room.name}</strong>
-          <span class="facts"><span>${peopleIcon}${room.base} ${room.max}</span><span>${areaIcon}${room.size}</span></span>
+          <span class="fact">${peopleIcon}${room.base} ${room.max}</span>
+          <span class="fact">${areaIcon}${room.size}</span>
           <span class="arrow" aria-hidden="true">→</span>
         </button>
       `).join("");
